@@ -1,4 +1,4 @@
-package com.training.fitnessappserver.entity.authentication;
+package com.training.fitnessappserver.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;

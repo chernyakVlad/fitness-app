@@ -1,6 +1,6 @@
 package com.training.fitnessappserver.services.impl;
 
-import com.training.fitnessappserver.entity.authentication.JwtToken;
+import com.training.fitnessappserver.entity.JwtToken;
 import com.training.fitnessappserver.repository.TokenRepository;
 import com.training.fitnessappserver.services.TokenStore;
 import org.springframework.beans.factory.annotation.Autowired;

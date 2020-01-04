@@ -1,6 +1,6 @@
 package com.training.fitnessappserver.repository;
 
-import com.training.fitnessappserver.entity.authentication.JwtToken;
+import com.training.fitnessappserver.entity.JwtToken;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

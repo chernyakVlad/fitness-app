@@ -1,6 +1,6 @@
 package com.training.fitnessappserver.validators;
 
-import com.training.fitnessappserver.entity.authentication.LoginUser;
+import com.training.fitnessappserver.dto.LoginRequestModel;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -10,16 +10,16 @@ import org.springframework.validation.Validator;
 public class LoginUserValidator implements Validator {
     @Override
     public boolean supports(Class<?> aClass) {
-        return LoginUser.class.equals(aClass);
+        return LoginRequestModel.class.equals(aClass);
     }
 
     public void validate(Object o, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "login", "field.required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "field.required");
 
-        LoginUser user = (LoginUser) o;
+        LoginRequestModel loginRequestModel = (LoginRequestModel) o;
 
-        if(user.getPassword().length() < 6){
+        if(loginRequestModel.getPassword().length() < 6){
             errors.rejectValue("password", "negativeValue", new Object[]{"'password'"}, "password length should be > 6");
         }
     }

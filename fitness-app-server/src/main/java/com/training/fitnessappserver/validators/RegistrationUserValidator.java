@@ -1,6 +1,6 @@
 package com.training.fitnessappserver.validators;
 
-import com.training.fitnessappserver.entity.authentication.RegistrationUser;
+import com.training.fitnessappserver.dto.RegisterRequestModel;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -13,22 +13,22 @@ public class RegistrationUserValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return RegistrationUser.class.equals(aClass);
+        return RegisterRequestModel.class.equals(aClass);
     }
 
     public void validate(Object o, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "login", "field required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "field required");
 
-        RegistrationUser user = (RegistrationUser) o;
+        RegisterRequestModel registrationModel = (RegisterRequestModel) o;
 
-        if (user.getPassword() != null && user.getPassword().trim().length() < MINIMUM_PASSWORD_LENGTH) {
+        if (registrationModel.getPassword() != null && registrationModel.getPassword().trim().length() < MINIMUM_PASSWORD_LENGTH) {
             errors.rejectValue("password", "field.min.length",
                     new Object[]{Integer.valueOf(MINIMUM_PASSWORD_LENGTH)},
                     "The password must be at least [" + MINIMUM_PASSWORD_LENGTH + "] characters in length.");
         }
 
-        if (user.getLogin() != null && user.getLogin().trim().length() < MINIMUM_LOGIN_LENGTH) {
+        if (registrationModel.getLogin() != null && registrationModel.getLogin().trim().length() < MINIMUM_LOGIN_LENGTH) {
             errors.rejectValue("login", "field.min.length",
                     new Object[]{Integer.valueOf(MINIMUM_LOGIN_LENGTH)},
                     "The login must be at least [" + MINIMUM_LOGIN_LENGTH + "] characters in length.");

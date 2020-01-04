@@ -1,9 +1,9 @@
 package com.training.fitnessappserver.services.impl;
 
+import com.training.fitnessappserver.dto.LoginRequestModel;
+import com.training.fitnessappserver.dto.RegisterRequestModel;
 import com.training.fitnessappserver.entity.User;
-import com.training.fitnessappserver.entity.authentication.JwtToken;
-import com.training.fitnessappserver.entity.authentication.LoginUser;
-import com.training.fitnessappserver.entity.authentication.RegistrationUser;
+import com.training.fitnessappserver.entity.JwtToken;
 import com.training.fitnessappserver.security.JwtTokenProvider;
 import com.training.fitnessappserver.services.AuthenticationSerivce;
 import com.training.fitnessappserver.services.TokenStore;
@@ -47,20 +47,20 @@ public class AuthenticationServiceImpl implements AuthenticationSerivce {
     }
 
     @Override
-    public User registration(RegistrationUser registrationUser) {
+    public User registration(RegisterRequestModel registerRequestModel) {
         User newUser = new User();
         User defaultUser = userService.findByLogin(User.DEFAULT_USER_LOGIN);
-        newUser.setLogin(registrationUser.getLogin());
-        newUser.setPassword(registrationUser.getPassword());
+        newUser.setLogin(registerRequestModel.getLogin());
+        newUser.setPassword(registerRequestModel.getPassword());
         return userService.save(newUser);
     }
 
     @Override
-    public JwtToken login(LoginUser loginUser) throws AuthenticationException, ExpiredJwtException {
+    public JwtToken login(LoginRequestModel loginRequest) throws AuthenticationException, ExpiredJwtException {
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginUser.getLogin(),
-                        loginUser.getPassword()
+                        loginRequest.getLogin(),
+                        loginRequest.getPassword()
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);

@@ -1,6 +1,6 @@
 package com.training.fitnessappserver.services;
 
-import com.training.fitnessappserver.entity.authentication.JwtToken;
+import com.training.fitnessappserver.entity.JwtToken;
 
 public interface TokenStore {
     public void storeToken(JwtToken token);

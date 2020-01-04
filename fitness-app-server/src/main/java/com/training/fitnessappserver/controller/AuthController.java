@@ -1,9 +1,9 @@
 package com.training.fitnessappserver.controller;
 
+import com.training.fitnessappserver.dto.LoginRequestModel;
+import com.training.fitnessappserver.dto.RegisterRequestModel;
 import com.training.fitnessappserver.entity.User;
-import com.training.fitnessappserver.entity.authentication.JwtToken;
-import com.training.fitnessappserver.entity.authentication.LoginUser;
-import com.training.fitnessappserver.entity.authentication.RegistrationUser;
+import com.training.fitnessappserver.entity.JwtToken;
 import com.training.fitnessappserver.exception.UserValidationException;
 import com.training.fitnessappserver.services.AuthenticationSerivce;
 import com.training.fitnessappserver.services.TokenStore;
@@ -39,25 +39,25 @@ public class AuthController {
     }
 
     @PostMapping(value="/register")
-    public ResponseEntity<User> signUp(@RequestBody RegistrationUser rUser, BindingResult bindingResult) {
-        regUserValidator.validate(rUser, bindingResult);
+    public ResponseEntity<User> signUp(@RequestBody RegisterRequestModel registerRequestModel, BindingResult bindingResult) {
+        regUserValidator.validate(registerRequestModel, bindingResult);
         if(bindingResult.hasErrors()){
             throw new UserValidationException(RestExceptionHandler.createExceptionMessage(bindingResult.getAllErrors()));
         }
-        return ResponseEntity.ok(authService.registration(rUser));
+        return ResponseEntity.ok(authService.registration(registerRequestModel));
     }
 
     @PostMapping(value = "/login")
-    public ResponseEntity<JwtToken> signIn(@RequestBody LoginUser lUser, BindingResult bindingResult) {
-        loginUserValidator.validate(lUser, bindingResult);
+    public ResponseEntity<JwtToken> signIn(@RequestBody LoginRequestModel lRequest, BindingResult bindingResult) {
+        loginUserValidator.validate(lRequest, bindingResult);
         if(bindingResult.hasErrors()) {
             throw new UserValidationException(RestExceptionHandler.createExceptionMessage(bindingResult.getAllErrors()));
         }
-        return ResponseEntity.ok(authService.login(lUser));
+        return ResponseEntity.ok(authService.login(lRequest));
     }
 
     @PostMapping(value = "/changePassword")
-    public ResponseEntity<?> resetPassword(@RequestParam String password, @RequestParam String newPassword) {
+    public ResponseEntity<?> changePassword(@RequestParam String password, @RequestParam String newPassword) {
         String login = SecurityContextHolder.getContext().getAuthentication().getName();
         authService.resetPassword(login, password, newPassword);
         return new ResponseEntity<>(HttpStatus.OK);

@@ -1,13 +1,8 @@
-package com.training.fitnessappserver.entity.authentication;
+package com.training.fitnessappserver.dto;
 
-public class LoginUser {
+public class RegisterRequestModel {
     private String login;
     private String password;
-
-    public LoginUser(String login, String password) {
-        this.login = login;
-        this.password = password;
-    }
 
     public String getLogin() {
         return login;
