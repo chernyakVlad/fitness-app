@@ -1,7 +1,7 @@
 package com.training.fitnessappserver.services.impl;
 
 import com.training.fitnessappserver.entity.User;
-import com.training.fitnessappserver.entity.UserParameterHistoryObject;
+import com.training.fitnessappserver.entity.UserParameters;
 import com.training.fitnessappserver.exception.ItemNotFoundException;
 import com.training.fitnessappserver.repository.RoleRepository;
 import com.training.fitnessappserver.repository.UserParameterRepository;
@@ -68,7 +68,16 @@ public class UserServiceImpl implements UserService {
     public User update(String id, User pUser) {
         User user = findById(id);
         BeanUtils.copyProperties(pUser, user, "id", "password");
-        userParameterRepository.save(new UserParameterHistoryObject(id, pUser.getWeight(), pUser.getHeight()));
+        userParameterRepository.save(new UserParameters(id, pUser.getWeight(), pUser.getHeight()));
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User updateUserParameters(String id, UserParameters userParameters) {
+        User user = findById(id);
+        user.setHeight(userParameters.getHeight());
+        user.setWeight(userParameters.getWeight());
+        userParameterRepository.save(userParameters);
         return userRepository.save(user);
     }
 
@@ -78,7 +87,7 @@ public class UserServiceImpl implements UserService {
         String password = pUser.getPassword() != null ? pUser.getPassword() : User.DEFAULT_USER_PASSWORD;
         pUser.setPassword(bCryptPasswordEncoder.encode(password));
         User createdUser = userRepository.save(pUser);
-        userParameterRepository.save(new UserParameterHistoryObject(createdUser.getId(), pUser.getWeight(), pUser.getHeight()));
+        userParameterRepository.save(new UserParameters(createdUser.getId(), pUser.getWeight(), pUser.getHeight()));
         return createdUser;
     }
 
@@ -105,7 +114,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserParameterHistoryObject> getUserParametersHistory(String id, LocalDate from, LocalDate to) {
+    public List<UserParameters> getUserParametersHistory(String id, LocalDate from, LocalDate to) {
         return userParameterRepository.getUserParametersForPeriod(id, from, to);
     }
 }

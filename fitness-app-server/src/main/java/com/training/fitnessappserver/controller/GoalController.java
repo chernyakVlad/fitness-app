@@ -1,9 +1,12 @@
 package com.training.fitnessappserver.controller;
 
+import com.training.fitnessappserver.entity.Activity;
 import com.training.fitnessappserver.entity.Exercise;
 import com.training.fitnessappserver.entity.Goal;
+import com.training.fitnessappserver.services.ActivityService;
 import com.training.fitnessappserver.services.ExerciseGenerationService;
 import com.training.fitnessappserver.services.GoalService;
+import com.training.fitnessappserver.services.impl.ActivityServiceImpl;
 import com.training.fitnessappserver.services.impl.ExerciseGenerationServiceImpl;
 import com.training.fitnessappserver.services.impl.GoalServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -21,12 +25,15 @@ public class GoalController {
 
     private GoalService goalService;
     private ExerciseGenerationService exerciseGenerationService;
+    private ActivityService activityService;
 
     @Autowired
     public GoalController(GoalServiceImpl goalService,
+                          ActivityServiceImpl activityServiceImpl,
                           ExerciseGenerationServiceImpl exerciseGenerationService) {
         this.goalService = goalService;
         this.exerciseGenerationService = exerciseGenerationService;
+        this.activityService = activityServiceImpl;
     }
 
     @GetMapping(value = "")
@@ -45,18 +52,21 @@ public class GoalController {
     }
 
     @GetMapping(value = "/{id}/exercise")
-    public ResponseEntity<Exercise> getExerciseForGoalForToday(@PathVariable String id) {
+    public ResponseEntity<Exercise> getExerciseForDay(@PathVariable String id) {
         return new ResponseEntity<Exercise>(exerciseGenerationService.getExerciseForToday(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}/exercises")
-    public ResponseEntity<List<Exercise>> getExerciseForGoalForMonth(@PathVariable String id) {
-        return new ResponseEntity<List<Exercise>>(exerciseGenerationService.getExerciseForMonth(id), HttpStatus.OK);
+    @GetMapping(value = "/{id}/activities")
+    public ResponseEntity<List<Activity>> getActivitiesForDay(@PathVariable String id, @RequestParam(required=false) LocalDate date) {
+        if (date != null) {
+            return new ResponseEntity<List<Activity>>(activityService.getDailyActivities(id, date), HttpStatus.OK);
+        }
+        return new ResponseEntity<List<Activity>>(activityService.getDailyActivities(id, date), HttpStatus.OK);
     }
 
     @PostMapping(value = "")
     public ResponseEntity<Goal> save(@RequestBody Goal goal, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             throw new RuntimeException();
         }
         return new ResponseEntity<>(goalService.save(goal), HttpStatus.CREATED);
@@ -66,7 +76,7 @@ public class GoalController {
     public ResponseEntity<Goal> update(@PathVariable String id,
                                        @RequestBody Goal goal,
                                        BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             throw new RuntimeException();
         }
         return new ResponseEntity<>(goalService.update(id, goal), HttpStatus.CREATED);

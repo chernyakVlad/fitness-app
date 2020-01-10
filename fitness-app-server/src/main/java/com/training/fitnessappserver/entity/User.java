@@ -2,15 +2,12 @@ package com.training.fitnessappserver.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
 @Document(collection = "user")
 public class User {
-    @Transient
-    public static final String SEQUENCE_NAME = "users_sequence";
     public static final String DEFAULT_USER_LOGIN = "default";
     public static final String DEFAULT_USER_PASSWORD = "123456";
 
@@ -33,6 +30,8 @@ public class User {
     private int weight;
 
     private String avatar;
+
+    private String goalId;
 
     @DBRef
     private Role role;
@@ -121,5 +120,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getGoalId() {
+        return goalId;
+    }
+
+    public void setGoalId(String goalId) {
+        this.goalId = goalId;
     }
 }

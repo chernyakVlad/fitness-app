@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
 @Document(collection = "user_parameter")
-public class UserParameterHistoryObject {
+public class UserParameters {
     @Id
     private String id;
     private String userId;
@@ -14,7 +14,7 @@ public class UserParameterHistoryObject {
     private int weight;
     private int height;
 
-    public UserParameterHistoryObject(String userId, int weight, int height) {
+    public UserParameters(String userId, int weight, int height) {
         this.date = LocalDateTime.now();
         this.userId = userId;
         this.height = height;

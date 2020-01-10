@@ -1,6 +1,8 @@
 package com.training.fitnessappserver.controller;
 
+import com.training.fitnessappserver.entity.Goal;
 import com.training.fitnessappserver.entity.User;
+import com.training.fitnessappserver.entity.UserParameters;
 import com.training.fitnessappserver.services.UserService;
 import com.training.fitnessappserver.services.impl.UserServiceImpl;
 import io.swagger.annotations.ApiOperation;
@@ -40,7 +42,7 @@ public class UserController {
     public ResponseEntity<?> getUserParametersHistory(@PathVariable String id,
                                                       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
                                                       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
-        return new ResponseEntity(userService.getUserParametersHistory(id, from, to), HttpStatus.OK);
+        return new ResponseEntity<>(userService.getUserParametersHistory(id, from, to), HttpStatus.OK);
     }
 
     @GetMapping(value = "/login/{login}")
@@ -58,9 +60,21 @@ public class UserController {
         return new ResponseEntity<User>(userService.update(id, user), HttpStatus.CREATED);
     }
 
+    @PutMapping(value = "/{id}/parameters")
+    public ResponseEntity<User> updateUserParameters(@PathVariable String id, @RequestBody UserParameters userParameters) {
+        return new ResponseEntity<User>(userService.updateUserParameters(id, userParameters), HttpStatus.CREATED);
+    }
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> delete(@PathVariable String id) {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/{id}/goal")
+    public ResponseEntity<User> setUserGoal(@PathVariable String id) {
+        User user = userService.findById(id);
+        user.setGoalId("1");
+        return new ResponseEntity<User>(userService.update(id, user), HttpStatus.OK);
     }
 }

@@ -8,9 +8,6 @@ import java.time.LocalDateTime;
 
 @Document(collection = "goal")
 public class Goal {
-    @Transient
-    public static final String SEQUENCE_NAME = "goals_sequence";
-
     @Id
     private String id;
 
