@@ -59,7 +59,7 @@ public class GoalServiceImpl implements GoalService {
     @Override
     public void delete(String id) {
         Goal goal = goalRepository.findById(id)
-                .orElseThrow(() -> new ItemNotFoundException("No goal found with id - " + id));
+                .orElseThrow(() -> new ItemNotFoundException("Goal with id - " + id + "not found"));
         goalRepository.delete(goal);
     }
 }

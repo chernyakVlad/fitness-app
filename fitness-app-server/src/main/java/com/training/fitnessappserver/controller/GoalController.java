@@ -3,11 +3,13 @@ package com.training.fitnessappserver.controller;
 import com.training.fitnessappserver.entity.Activity;
 import com.training.fitnessappserver.entity.Exercise;
 import com.training.fitnessappserver.entity.Goal;
-import com.training.fitnessappserver.services.ActivityService;
-import com.training.fitnessappserver.services.ExerciseGenerationService;
+import com.training.fitnessappserver.entity.enums.GoalType;
+import com.training.fitnessappserver.services.exercise.ExerciseService;
 import com.training.fitnessappserver.services.GoalService;
-import com.training.fitnessappserver.services.impl.ActivityServiceImpl;
-import com.training.fitnessappserver.services.impl.ExerciseGenerationServiceImpl;
+import com.training.fitnessappserver.services.activity.ActivityServiceFactory;
+import com.training.fitnessappserver.services.exercise.ExerciseServiceFactory;
+import com.training.fitnessappserver.services.exercise.ExerciseStoreService;
+import com.training.fitnessappserver.services.exercise.impl.ExerciseForGainService;
 import com.training.fitnessappserver.services.impl.GoalServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,16 +26,19 @@ import java.util.List;
 public class GoalController {
 
     private GoalService goalService;
-    private ExerciseGenerationService exerciseGenerationService;
-    private ActivityService activityService;
+    private ExerciseServiceFactory exerciseServiceFactory;
+    private ExerciseStoreService exerciseStoreService;
+    private ActivityServiceFactory activityServiceFactory;
 
     @Autowired
     public GoalController(GoalServiceImpl goalService,
-                          ActivityServiceImpl activityServiceImpl,
-                          ExerciseGenerationServiceImpl exerciseGenerationService) {
+                          ActivityServiceFactory activityServiceFactory,
+                          ExerciseServiceFactory exerciseServiceFactory,
+                          ExerciseStoreService exerciseStoreService) {
         this.goalService = goalService;
-        this.exerciseGenerationService = exerciseGenerationService;
-        this.activityService = activityServiceImpl;
+        this.exerciseServiceFactory = exerciseServiceFactory;
+        this.activityServiceFactory = activityServiceFactory;
+        this.exerciseStoreService = exerciseStoreService;
     }
 
     @GetMapping(value = "")
@@ -53,15 +58,23 @@ public class GoalController {
 
     @GetMapping(value = "/{id}/exercise")
     public ResponseEntity<Exercise> getExerciseForDay(@PathVariable String id) {
-        return new ResponseEntity<Exercise>(exerciseGenerationService.getExerciseForToday(id), HttpStatus.OK);
+        Exercise exerciseForToday = exerciseServiceFactory.getExerciseService(GoalType.GAIN).getExerciseForToday(id);
+        return new ResponseEntity<Exercise>(exerciseForToday , HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/{userId}/exercise/{exerciseId}")
+    public ResponseEntity<Exercise> getExerciseForDay(@PathVariable String userId, @PathVariable String exerciseId, @RequestBody Exercise exercise) {
+        return new ResponseEntity<Exercise>(exerciseStoreService.update(exerciseId, exercise), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}/activities")
     public ResponseEntity<List<Activity>> getActivitiesForDay(@PathVariable String id, @RequestParam(required=false) LocalDate date) {
         if (date != null) {
-            return new ResponseEntity<List<Activity>>(activityService.getDailyActivities(id, date), HttpStatus.OK);
+            List<Activity> activities = activityServiceFactory.getActivityService(GoalType.GAIN).getDailyActivities(id, date);
+            return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
         }
-        return new ResponseEntity<List<Activity>>(activityService.getDailyActivities(id, date), HttpStatus.OK);
+        List<Activity> activities = activityServiceFactory.getActivityService(GoalType.GAIN).getDailyActivities(id, date);
+        return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
     }
 
     @PostMapping(value = "")
