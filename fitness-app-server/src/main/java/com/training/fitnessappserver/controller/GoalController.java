@@ -65,10 +65,7 @@ public class GoalController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<Goal> save(@RequestBody Goal goal, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            throw new RuntimeException();
-        }
+    public ResponseEntity<Goal> save(@RequestBody Goal goal) {
         return new ResponseEntity<>(goalService.save(goal), HttpStatus.CREATED);
     }
 

@@ -74,7 +74,7 @@ public class UserController {
     @PostMapping(value = "/{id}/goal")
     public ResponseEntity<User> setUserGoal(@PathVariable String id) {
         User user = userService.findById(id);
-        user.setGoalId("1");
+        user.setHasGoal(true);
         return new ResponseEntity<User>(userService.update(id, user), HttpStatus.OK);
     }
 }

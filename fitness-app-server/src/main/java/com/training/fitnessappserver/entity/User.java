@@ -31,7 +31,7 @@ public class User {
 
     private String avatar;
 
-    private String goalId;
+    private boolean hasGoal;
 
     @DBRef
     private Role role;
@@ -122,11 +122,11 @@ public class User {
         this.role = role;
     }
 
-    public String getGoalId() {
-        return goalId;
+    public boolean isHasGoal() {
+        return hasGoal;
     }
 
-    public void setGoalId(String goalId) {
-        this.goalId = goalId;
+    public void setHasGoal(boolean hasGoal) {
+        this.hasGoal = hasGoal;
     }
 }

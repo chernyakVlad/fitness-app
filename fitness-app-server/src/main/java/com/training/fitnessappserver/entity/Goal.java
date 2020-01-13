@@ -1,7 +1,7 @@
 package com.training.fitnessappserver.entity;
 
+import com.training.fitnessappserver.entity.enums.GoalType;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -26,6 +26,8 @@ public class Goal {
     private int measureTo;
 
     private String measureLabel;
+
+    private GoalType type;
 
     public String getId() {
         return id;
@@ -99,4 +101,11 @@ public class Goal {
         this.measureLabel = measureLabel;
     }
 
+    public GoalType getType() {
+        return type;
+    }
+
+    public void setType(GoalType type) {
+        this.type = type;
+    }
 }
