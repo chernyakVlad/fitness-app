@@ -1,7 +1,7 @@
-package com.training.fitnessappserver.services.impl;
+package com.training.fitnessappserver.service.impl;
 
 
-import com.training.fitnessappserver.services.ImageStore;
+import com.training.fitnessappserver.service.ImageStore;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;

@@ -1,10 +1,7 @@
-package com.training.fitnessappserver.services.exercise;
+package com.training.fitnessappserver.service.exercise;
 
 import com.training.fitnessappserver.entity.Exercise;
 
-import java.util.List;
-
 public interface ExerciseService {
     Exercise getExerciseForToday(String userId);
-    List<Exercise> getExerciseForMonth(String userId);
 }

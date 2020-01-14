@@ -1,8 +1,8 @@
-package com.training.fitnessappserver.services.impl;
+package com.training.fitnessappserver.service.impl;
 
 import com.training.fitnessappserver.entity.JwtToken;
 import com.training.fitnessappserver.repository.TokenRepository;
-import com.training.fitnessappserver.services.TokenStore;
+import com.training.fitnessappserver.service.TokenStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.exceptions.InvalidTokenException;
 import org.springframework.stereotype.Service;

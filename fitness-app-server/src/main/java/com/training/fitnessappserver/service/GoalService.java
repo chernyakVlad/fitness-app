@@ -1,4 +1,4 @@
-package com.training.fitnessappserver.services;
+package com.training.fitnessappserver.service;
 
 import com.training.fitnessappserver.entity.Goal;
 

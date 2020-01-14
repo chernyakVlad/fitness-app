@@ -1,13 +1,13 @@
-package com.training.fitnessappserver.services.impl;
+package com.training.fitnessappserver.service.impl;
 
 import com.training.fitnessappserver.dto.LoginRequestModel;
 import com.training.fitnessappserver.dto.RegisterRequestModel;
 import com.training.fitnessappserver.entity.User;
 import com.training.fitnessappserver.entity.JwtToken;
 import com.training.fitnessappserver.security.JwtTokenProvider;
-import com.training.fitnessappserver.services.AuthenticationSerivce;
-import com.training.fitnessappserver.services.TokenStore;
-import com.training.fitnessappserver.services.UserService;
+import com.training.fitnessappserver.service.AuthenticationSerivce;
+import com.training.fitnessappserver.service.TokenStore;
+import com.training.fitnessappserver.service.UserService;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

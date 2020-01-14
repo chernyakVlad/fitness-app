@@ -1,6 +1,6 @@
 package com.training.fitnessappserver.security;
 
-import com.training.fitnessappserver.services.impl.TokenStoreImpl;
+import com.training.fitnessappserver.service.impl.TokenStoreImpl;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

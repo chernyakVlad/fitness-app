@@ -1,4 +1,4 @@
-package com.training.fitnessappserver.services.impl;
+package com.training.fitnessappserver.service.impl;
 
 import com.training.fitnessappserver.entity.User;
 import com.training.fitnessappserver.entity.UserParameters;
@@ -6,8 +6,8 @@ import com.training.fitnessappserver.exception.ItemNotFoundException;
 import com.training.fitnessappserver.repository.RoleRepository;
 import com.training.fitnessappserver.repository.UserParameterRepository;
 import com.training.fitnessappserver.repository.UserRepository;
-import com.training.fitnessappserver.services.ImageStore;
-import com.training.fitnessappserver.services.UserService;
+import com.training.fitnessappserver.service.ImageStore;
+import com.training.fitnessappserver.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;

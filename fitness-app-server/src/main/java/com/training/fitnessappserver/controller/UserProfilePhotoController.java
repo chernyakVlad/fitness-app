@@ -1,10 +1,10 @@
 package com.training.fitnessappserver.controller;
 
 import com.training.fitnessappserver.entity.User;
-import com.training.fitnessappserver.services.ImageStore;
-import com.training.fitnessappserver.services.UserService;
-import com.training.fitnessappserver.services.impl.ImageStoreInFileSystem;
-import com.training.fitnessappserver.services.impl.UserServiceImpl;
+import com.training.fitnessappserver.service.ImageStore;
+import com.training.fitnessappserver.service.UserService;
+import com.training.fitnessappserver.service.impl.ImageStoreInFileSystem;
+import com.training.fitnessappserver.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;

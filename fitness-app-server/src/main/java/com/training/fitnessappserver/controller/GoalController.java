@@ -4,13 +4,12 @@ import com.training.fitnessappserver.entity.Activity;
 import com.training.fitnessappserver.entity.Exercise;
 import com.training.fitnessappserver.entity.Goal;
 import com.training.fitnessappserver.entity.enums.GoalType;
-import com.training.fitnessappserver.services.exercise.ExerciseService;
-import com.training.fitnessappserver.services.GoalService;
-import com.training.fitnessappserver.services.activity.ActivityServiceFactory;
-import com.training.fitnessappserver.services.exercise.ExerciseServiceFactory;
-import com.training.fitnessappserver.services.exercise.ExerciseStoreService;
-import com.training.fitnessappserver.services.exercise.impl.ExerciseForGainService;
-import com.training.fitnessappserver.services.impl.GoalServiceImpl;
+import com.training.fitnessappserver.service.ActivityService;
+import com.training.fitnessappserver.service.GoalService;
+import com.training.fitnessappserver.service.exercise.ExerciseServiceFactory;
+import com.training.fitnessappserver.service.exercise.ExerciseStoreService;
+import com.training.fitnessappserver.service.impl.ActivityServiceImpl;
+import com.training.fitnessappserver.service.impl.GoalServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,16 +27,17 @@ public class GoalController {
     private GoalService goalService;
     private ExerciseServiceFactory exerciseServiceFactory;
     private ExerciseStoreService exerciseStoreService;
-    private ActivityServiceFactory activityServiceFactory;
+    private ActivityService activityService;
+
 
     @Autowired
     public GoalController(GoalServiceImpl goalService,
-                          ActivityServiceFactory activityServiceFactory,
+                          ActivityServiceImpl activityService,
                           ExerciseServiceFactory exerciseServiceFactory,
                           ExerciseStoreService exerciseStoreService) {
         this.goalService = goalService;
         this.exerciseServiceFactory = exerciseServiceFactory;
-        this.activityServiceFactory = activityServiceFactory;
+        this.activityService = activityService;
         this.exerciseStoreService = exerciseStoreService;
     }
 
@@ -70,10 +70,10 @@ public class GoalController {
     @GetMapping(value = "/{id}/activities")
     public ResponseEntity<List<Activity>> getActivitiesForDay(@PathVariable String id, @RequestParam(required=false) LocalDate date) {
         if (date != null) {
-            List<Activity> activities = activityServiceFactory.getActivityService(GoalType.GAIN).getDailyActivities(id, date);
+            List<Activity> activities = activityService.getDailyActivities(id, date);
             return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
         }
-        List<Activity> activities = activityServiceFactory.getActivityService(GoalType.GAIN).getDailyActivities(id, date);
+        List<Activity> activities = activityService.getDailyActivities(id, date);
         return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
     }
 

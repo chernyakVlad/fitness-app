@@ -1,7 +1,6 @@
-package com.training.fitnessappserver.services.exercise;
+package com.training.fitnessappserver.service.exercise;
 
 import com.training.fitnessappserver.entity.Exercise;
-import com.training.fitnessappserver.entity.UserParameters;
 import com.training.fitnessappserver.repository.ExerciseRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.training.fitnessappserver.services;
+package com.training.fitnessappserver.service;
 
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;

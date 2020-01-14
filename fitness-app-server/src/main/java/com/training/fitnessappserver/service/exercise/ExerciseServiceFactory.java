@@ -1,4 +1,4 @@
-package com.training.fitnessappserver.services.exercise;
+package com.training.fitnessappserver.service.exercise;
 
 import com.training.fitnessappserver.entity.enums.GoalType;
 import org.springframework.beans.factory.annotation.Autowired;

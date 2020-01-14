@@ -1,4 +1,4 @@
-package com.training.fitnessappserver.services.activity;
+package com.training.fitnessappserver.service;
 
 import com.training.fitnessappserver.entity.Activity;
 
