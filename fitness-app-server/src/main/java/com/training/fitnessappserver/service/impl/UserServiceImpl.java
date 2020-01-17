@@ -11,6 +11,7 @@ import com.training.fitnessappserver.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -115,6 +116,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserParameters> getUserParametersHistory(String id, LocalDate from, LocalDate to) {
-        return userParameterRepository.getUserParametersForPeriod(id, from, to);
+        Sort sort = Sort.by("date");
+        return userParameterRepository.getUserParametersForPeriod(id, from, to, sort);
     }
 }

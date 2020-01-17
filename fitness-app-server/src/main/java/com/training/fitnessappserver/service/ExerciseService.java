@@ -1,4 +1,4 @@
-package com.training.fitnessappserver.service.exercise;
+package com.training.fitnessappserver.service;
 
 import com.training.fitnessappserver.entity.Exercise;
 

@@ -3,12 +3,11 @@ package com.training.fitnessappserver.controller;
 import com.training.fitnessappserver.entity.Activity;
 import com.training.fitnessappserver.entity.Exercise;
 import com.training.fitnessappserver.entity.Goal;
-import com.training.fitnessappserver.entity.enums.GoalType;
 import com.training.fitnessappserver.service.ActivityService;
+import com.training.fitnessappserver.service.ExerciseService;
 import com.training.fitnessappserver.service.GoalService;
-import com.training.fitnessappserver.service.exercise.ExerciseServiceFactory;
-import com.training.fitnessappserver.service.exercise.ExerciseStoreService;
 import com.training.fitnessappserver.service.impl.ActivityServiceImpl;
+import com.training.fitnessappserver.service.impl.ExerciseStoreService;
 import com.training.fitnessappserver.service.impl.GoalServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +24,7 @@ import java.util.List;
 public class GoalController {
 
     private GoalService goalService;
-    private ExerciseServiceFactory exerciseServiceFactory;
+    private ExerciseService exerciseService;
     private ExerciseStoreService exerciseStoreService;
     private ActivityService activityService;
 
@@ -33,10 +32,10 @@ public class GoalController {
     @Autowired
     public GoalController(GoalServiceImpl goalService,
                           ActivityServiceImpl activityService,
-                          ExerciseServiceFactory exerciseServiceFactory,
+                          ExerciseService exerciseService,
                           ExerciseStoreService exerciseStoreService) {
         this.goalService = goalService;
-        this.exerciseServiceFactory = exerciseServiceFactory;
+        this.exerciseService = exerciseService;
         this.activityService = activityService;
         this.exerciseStoreService = exerciseStoreService;
     }
@@ -58,8 +57,8 @@ public class GoalController {
 
     @GetMapping(value = "/{id}/exercise")
     public ResponseEntity<Exercise> getExerciseForDay(@PathVariable String id) {
-        Exercise exerciseForToday = exerciseServiceFactory.getExerciseService(GoalType.GAIN).getExerciseForToday(id);
-        return new ResponseEntity<Exercise>(exerciseForToday , HttpStatus.OK);
+        Exercise exerciseForToday = exerciseService.getExerciseForToday(id);
+        return new ResponseEntity<Exercise>(exerciseForToday, HttpStatus.OK);
     }
 
     @PutMapping(value = "/{userId}/exercise/{exerciseId}")
@@ -68,7 +67,7 @@ public class GoalController {
     }
 
     @GetMapping(value = "/{id}/activities")
-    public ResponseEntity<List<Activity>> getActivitiesForDay(@PathVariable String id, @RequestParam(required=false) LocalDate date) {
+    public ResponseEntity<List<Activity>> getActivitiesForDay(@PathVariable String id, @RequestParam(required = false) LocalDate date) {
         if (date != null) {
             List<Activity> activities = activityService.getDailyActivities(id, date);
             return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);

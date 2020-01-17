@@ -1,9 +1,10 @@
-package com.training.fitnessappserver.service.exercise;
+package com.training.fitnessappserver.service.impl;
 
 import com.training.fitnessappserver.entity.Exercise;
 import com.training.fitnessappserver.repository.ExerciseRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

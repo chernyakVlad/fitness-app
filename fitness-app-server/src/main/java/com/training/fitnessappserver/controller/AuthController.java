@@ -19,7 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/v1/auth")
 @CrossOrigin(origins = "http://localhost:3000")
 public class AuthController {
     private AuthenticationSerivce authService;
