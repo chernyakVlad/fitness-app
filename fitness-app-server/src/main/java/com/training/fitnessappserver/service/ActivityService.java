@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ActivityService {
     List<Activity> getDailyActivities (String userId, LocalDate date);
+    Activity getActivityByDateAndUserId(String userId, LocalDate date);
 }
