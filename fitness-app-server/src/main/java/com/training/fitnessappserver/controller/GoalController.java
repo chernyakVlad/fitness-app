@@ -69,10 +69,10 @@ public class GoalController {
     @GetMapping(value = "/{id}/activities")
     public ResponseEntity<List<Activity>> getActivitiesForDay(@PathVariable String id, @RequestParam(required = false) LocalDate date) {
         if (date != null) {
-            List<Activity> activities = activityService.getDailyActivities(id, date);
+            List<Activity> activities = (List<Activity>) activityService.getActivitiesByDateAndUserId(id, date);
             return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
         }
-        List<Activity> activities = activityService.getDailyActivities(id, date);
+        List<Activity> activities = (List<Activity>) activityService.getActivitiesByDateAndUserId(id, date);
         return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
     }
 

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @Document(collection = "activity")
 public class Activity {
+    private String activityId;
     private String userId;
     private String name;
     private String description;

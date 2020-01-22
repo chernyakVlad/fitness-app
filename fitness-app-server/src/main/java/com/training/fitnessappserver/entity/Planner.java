@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Objects;
 
 @Data
-@Document(collection = "day_planner")
-public class DayPlanner {
+@Document(collection = "planner")
+public class Planner {
     @Id
-    private String id;
+    private String planId;
     private String userId;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date;
@@ -26,7 +26,7 @@ public class DayPlanner {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DayPlanner that = (DayPlanner) o;
+        Planner that = (Planner) o;
         return Objects.equals(date, that.date) &&
                 Objects.equals(dayActivities, that.dayActivities);
     }

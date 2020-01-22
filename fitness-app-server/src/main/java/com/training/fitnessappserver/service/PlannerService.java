@@ -5,6 +5,6 @@ import com.training.fitnessappserver.entity.Activity;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface ActivityService {
-    List<Activity> getActivitiesByDateAndUserId(String userId, LocalDate date);
+public interface PlannerService {
+    List<Activity> getDailyActivities(String userId, LocalDate date);
 }
