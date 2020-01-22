@@ -43,4 +43,9 @@ public class ExerciseServiceImpl implements ExerciseService {
             return exercise.get(0);
         }
     }
+
+    @Override
+    public Exercise update(String id, Exercise exercise) {
+        return exerciseStoreService.update(id, exercise);
+    }
 }

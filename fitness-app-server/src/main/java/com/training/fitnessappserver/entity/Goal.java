@@ -15,19 +15,13 @@ public class Goal {
 
     private String userId;
 
-    private String description;
-
-    private String measuring;
-
     private LocalDateTime startDate;
 
     private LocalDateTime endDate;
 
-    private int measureFrom;
+    private double measureFrom;
 
-    private int measureTo;
-
-    private String measureLabel;
+    private double measureTo;
 
     private GoalType type;
 }
