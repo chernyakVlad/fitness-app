@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Data
-@Document(collection = "planner")
-public class Planner {
+@Document(collection = "plan")
+public class Plan {
     @Id
     private String planId;
     private String userId;
@@ -26,7 +26,7 @@ public class Planner {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Planner that = (Planner) o;
+        Plan that = (Plan) o;
         return Objects.equals(date, that.date) &&
                 Objects.equals(dayActivities, that.dayActivities);
     }

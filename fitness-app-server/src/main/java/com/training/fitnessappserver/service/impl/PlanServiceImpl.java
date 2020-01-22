@@ -3,13 +3,13 @@ package com.training.fitnessappserver.service.impl;
 import com.training.fitnessappserver.entity.Activity;
 import com.training.fitnessappserver.exception.ItemNotFoundException;
 import com.training.fitnessappserver.repository.ActivityRepository;
-import com.training.fitnessappserver.service.PlannerService;
+import com.training.fitnessappserver.service.PlanService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 @Service
-public class PlannerServiceImpl implements PlannerService {
+public class PlanServiceImpl implements PlanService {
     ActivityRepository activityRepository;
 
     @Override
