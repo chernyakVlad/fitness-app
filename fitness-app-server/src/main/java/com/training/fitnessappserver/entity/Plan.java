@@ -20,7 +20,7 @@ public class Plan {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date;
     @DBRef
-    private List<Activity> dayActivities= new ArrayList<>();
+    private List<Activity> activities;
 
     @Override
     public boolean equals(Object o) {
@@ -28,11 +28,11 @@ public class Plan {
         if (o == null || getClass() != o.getClass()) return false;
         Plan that = (Plan) o;
         return Objects.equals(date, that.date) &&
-                Objects.equals(dayActivities, that.dayActivities);
+                Objects.equals(activities, that.activities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(date, dayActivities);
+        return Objects.hash(date, activities);
     }
 }

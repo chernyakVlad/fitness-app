@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Document(collection = "activity")
 public class Activity {
     private String activityId;
-    private String userId;
+    private String planId;
     private String name;
     private String description;
     private boolean isCompleted;

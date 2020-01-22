@@ -20,14 +20,13 @@ public class ActivityServiceImpl implements ActivityService {
     ActivityRepository activityRepository;
 
     @Override
-    public List<Activity> getActivitiesByDateAndUserId(String userId, LocalDate date) {
+    public List<Activity> getActivitiesByDateAndUserId(String planId, LocalDate date) {
 
-        Activity activity = activityRepository.getActivityByUserIdAndDate(userId, date);
-        List<Activity> activities=new ArrayList<>();
-        if (activity == null) {
-            throw new ItemNotFoundException("There is no activity on date" + date + "and userId" + userId);
+        List<Activity> activities = activityRepository.getActivitiesByPlanIdAndDate(planId, date);
+
+        if (activities == null) {
+            throw new ItemNotFoundException("There is no activity on date" + date + "and planId" + planId);
         } else {
-            activities.add(activity);
 
             return activities;
         }

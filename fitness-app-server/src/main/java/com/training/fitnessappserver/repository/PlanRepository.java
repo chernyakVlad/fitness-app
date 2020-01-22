@@ -8,5 +8,5 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface PlanRepository extends MongoRepository<Plan, String> {
-    List<Activity> getByUserIdAndDate(String userId, LocalDate date);
+    Plan getPlanActivitiesByUserIdAndDate(String userId, LocalDate date);
 }

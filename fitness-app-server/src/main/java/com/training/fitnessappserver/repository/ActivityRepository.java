@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ActivityRepository extends MongoRepository<Activity, String> {
-    List<Activity> getActivitiesByUserIdAndDate(String userId, LocalDate date);
 
-    Activity getActivityByUserIdAndDate(String userId, LocalDate date);
+    List<Activity> getActivitiesByPlanIdAndDate(String planId, LocalDate date);
 }
