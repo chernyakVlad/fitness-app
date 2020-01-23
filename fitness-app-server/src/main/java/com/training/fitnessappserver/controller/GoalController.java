@@ -7,7 +7,6 @@ import com.training.fitnessappserver.service.ActivityService;
 import com.training.fitnessappserver.service.ExerciseService;
 import com.training.fitnessappserver.service.GoalService;
 import com.training.fitnessappserver.service.impl.ActivityServiceImpl;
-import com.training.fitnessappserver.service.impl.ExerciseStoreService;
 import com.training.fitnessappserver.service.impl.GoalServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,19 +24,16 @@ public class GoalController {
 
     private GoalService goalService;
     private ExerciseService exerciseService;
-    private ExerciseStoreService exerciseStoreService;
     private ActivityService activityService;
 
 
     @Autowired
     public GoalController(GoalServiceImpl goalService,
                           ActivityServiceImpl activityService,
-                          ExerciseService exerciseService,
-                          ExerciseStoreService exerciseStoreService) {
+                          ExerciseService exerciseService) {
         this.goalService = goalService;
         this.exerciseService = exerciseService;
         this.activityService = activityService;
-        this.exerciseStoreService = exerciseStoreService;
     }
 
     @GetMapping(value = "")
@@ -63,7 +59,7 @@ public class GoalController {
 
     @PutMapping(value = "/{userId}/exercise/{exerciseId}")
     public ResponseEntity<Exercise> getExerciseForDay(@PathVariable String userId, @PathVariable String exerciseId, @RequestBody Exercise exercise) {
-        return new ResponseEntity<Exercise>(exerciseStoreService.update(exerciseId, exercise), HttpStatus.OK);
+        return new ResponseEntity<Exercise>(exerciseService.update(exerciseId, exercise), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}/activities")
