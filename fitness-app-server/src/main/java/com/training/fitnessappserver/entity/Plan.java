@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,4 +23,40 @@ public class Plan {
     @DBRef
     private List<Activity> activities;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Plan plan = (Plan) o;
+        return Objects.equals(planId, plan.planId) &&
+                Objects.equals(userId, plan.userId) &&
+                Objects.equals(date, plan.date) &&
+                Objects.equals(activities, plan.activities);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(planId, userId, date, activities);
+    }
+
+    public List<Activity> getActivities() {
+        if(this.activities==null){
+            activities=new ArrayList<>();
+        }
+        return activities;
+    }
+
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
+    }
+
+    @Override
+    public String toString() {
+        return "Plan{" +
+                "planId='" + planId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", date=" + date +
+                ", activities=" + activities +
+                '}';
+    }
 }

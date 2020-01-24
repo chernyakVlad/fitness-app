@@ -57,13 +57,14 @@ public class ExerciseServiceImpl implements ExerciseService {
         LocalDate date = LocalDate.now();
         List<Exercise> exercise = getByUserIdAndDate(userId, date);
         if (exercise == null || exercise.size() <= 0) {
-            return exercise.get(0);
-
-        } else {
             int calories = (int) (66.5 + goalConfig.getWeightRatioForCalories() * user.getWeight() + goalConfig.getHeightRatioForCalories() * user.getHeight() - goalConfig.getAgeRatioForCalories() * user.getAge());
             double water = goalConfig.getWeightRatioForWater() * user.getWeight();
             Exercise exercise1 = new Exercise(calories, water, goalConfig.getSleepInHours(), goalConfig.getActivity(), date, userId);
             return save(exercise1);
+
+        } else {
+            return exercise.get(0);
+
         }
     }
 

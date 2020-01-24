@@ -3,28 +3,58 @@ package com.training.fitnessappserver.service.impl;
 import com.training.fitnessappserver.entity.Activity;
 import com.training.fitnessappserver.entity.Plan;
 import com.training.fitnessappserver.exception.ItemNotFoundException;
+import com.training.fitnessappserver.repository.ActivityRepository;
 import com.training.fitnessappserver.repository.PlanRepository;
+import com.training.fitnessappserver.service.ActivityService;
 import com.training.fitnessappserver.service.PlanService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlanServiceImpl implements PlanService {
     PlanRepository planRepository;
+    ActivityRepository activityRepository;
+@Autowired
+    public PlanServiceImpl(PlanRepository planRepository, ActivityRepository activityRepository) {
+        this.planRepository = planRepository;
+        this.activityRepository = activityRepository;
+    }
+
+    @Override
+    public Plan addPlanActivity(String id, Activity activity) {
+        Optional<Plan> plan = planRepository.findById(id);
+        new ActivityServiceImpl(activityRepository).save(activity);
+        if (plan.isPresent()) {
+            Plan planNotNull=plan.get();
+            planNotNull.getActivities().add(activity);
+            return save(planNotNull);
+        }else{
+            throw new ItemNotFoundException("There is no plan with id" + id);
+        }
+
+    }
+
+    @Override
+    public List<Plan> getByUserId(String userId) {
+        List<Plan> plans = planRepository.findByUserId(userId);
+        if (plans.isEmpty()) {
+            throw new ItemNotFoundException("There is no plan with id" + userId);
+        } else {
+            return plans;
+        }
+    }
 
     @Override
     public Plan getById(String planId) {
-        return planRepository.findById(planId).orElseThrow(()->new ItemNotFoundException("There is no plan with id"+planId));
+        return planRepository.findById(planId).orElseThrow(() -> new ItemNotFoundException("There is no plan with id" + planId));
     }
 
-    @Autowired
-    public PlanServiceImpl(PlanRepository planRepository) {
-        this.planRepository = planRepository;
-    }
 
     @Override
     public Plan save(Plan plan) {
