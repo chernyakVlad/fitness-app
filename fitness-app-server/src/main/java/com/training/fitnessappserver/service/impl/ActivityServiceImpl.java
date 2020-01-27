@@ -28,12 +28,11 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
 
-
     @Override
-    public List<Activity> getActivitiesByDateAndUserId(String planId, LocalDate date) {
+    public List<Activity> getActivitiesByPlanId(String planId) {
 
-        return activityRepository.getActivitiesByPlanIdAndDate(planId, date)
-                .orElseThrow(() -> new ItemNotFoundException("There is no activity on date" + date + "and planId" + planId));
+        return activityRepository.getActivitiesByPlanId(planId)
+                .orElseThrow(() -> new ItemNotFoundException("There is no activity on date" + "and planId" + planId));
 
     }
 
@@ -48,6 +47,7 @@ public class ActivityServiceImpl implements ActivityService {
             throw new ItemNotFoundException("Activity not found");
         }
     }
+
     @Override
     public Activity save(Activity activity) {
         return activityRepository.save(activity);

@@ -23,11 +23,7 @@ public class ActivityController {
         this.activityService = activityService;
     }
 
-    @GetMapping(value = "/today")
-    public ResponseEntity<List<Activity>> getActivitiesForDay(@PathVariable String id, @RequestParam(required = false) LocalDate date) {
-        List<Activity> activities =  activityService.getActivitiesByDateAndUserId(id, date);
-        return new ResponseEntity<>(activities, HttpStatus.OK);
-    }
+
     @PutMapping(value = "/{id}")
     public ResponseEntity<Activity> updateActivity(@PathVariable String id, @RequestBody Activity activity) {
         return new ResponseEntity<Activity>(activityService.update(id, activity), HttpStatus.OK);

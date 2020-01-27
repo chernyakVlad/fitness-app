@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ActivityService {
-    List<Activity> getActivitiesByDateAndUserId(String userId, LocalDate date);
+    List<Activity> getActivitiesByPlanId(String userId);
     Activity update(String id, Activity activity);
     Activity save(Activity activity);
 }

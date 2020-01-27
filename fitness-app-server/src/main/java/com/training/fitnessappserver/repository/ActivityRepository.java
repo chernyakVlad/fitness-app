@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface ActivityRepository extends MongoRepository<Activity, String> {
 
-    Optional<List<Activity>> getActivitiesByPlanIdAndDate(String planId, LocalDate date);
+    Optional<List<Activity>> getActivitiesByPlanId(String planId);
 }

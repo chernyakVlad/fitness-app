@@ -29,8 +29,8 @@ public class PlanController {
         return new ResponseEntity<Plan>(planService.getById(id), HttpStatus.OK);
     }
     @GetMapping(value = "/u/{userId}")
-    public ResponseEntity<List<Plan>> getByUserId(@PathVariable String userId) {
-        return new ResponseEntity<List<Plan>>(planService.getByUserId(userId), HttpStatus.OK);
+    public ResponseEntity<Plan> getByUserId(@PathVariable String userId) {
+        return new ResponseEntity<Plan>(planService.getByUserId(userId), HttpStatus.OK);
     }
     @PutMapping(value = "/{id}")
     public ResponseEntity<Plan> update(@PathVariable String id,

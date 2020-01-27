@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public interface PlanRepository extends MongoRepository<Plan, String> {
     Optional<Plan> getPlanActivitiesByUserIdAndDate(String userId, LocalDate date);
+
     Optional<Plan> getPlanByUserIdAndDate(String userId, LocalDate date);
     List<Plan> findByUserId(String userId);
 }

@@ -31,9 +31,9 @@ public class PlanServiceImpl implements PlanService {
         Optional<Plan> plan = planRepository.findById(id);
         new ActivityServiceImpl(activityRepository).save(activity);
         if (plan.isPresent()) {
-            Plan planNotNull=plan.get();
-            planNotNull.getActivities().add(activity);
-            return save(planNotNull);
+
+            plan.get().getActivities().add(activity);
+            return save(plan.get());
         }else{
             throw new ItemNotFoundException("There is no plan with id" + id);
         }
@@ -41,17 +41,21 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public List<Plan> getByUserId(String userId) {
-        List<Plan> plans = planRepository.findByUserId(userId);
-        if (plans.isEmpty()) {
-            throw new ItemNotFoundException("There is no plan with id" + userId);
-        } else {
+    public Plan getByUserId(String userId) {
+        LocalDate date =LocalDate.now();
+        Plan plans = getPlan(userId,date);
+
+//        if (plan.isEmpty()) {
+//            throw new ItemNotFoundException("There is no plan with id" + userId);
+//        } else {
             return plans;
-        }
+      //  }
     }
+
 
     @Override
     public Plan getById(String planId) {
+
         return planRepository.findById(planId).orElseThrow(() -> new ItemNotFoundException("There is no plan with id" + planId));
     }
 

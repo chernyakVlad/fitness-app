@@ -19,6 +19,7 @@ public class Plan {
     @Id
     private String planId;
     private String userId;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date;
     @DBRef
     private List<Activity> activities;
@@ -50,13 +51,5 @@ public class Plan {
         this.activities = activities;
     }
 
-    @Override
-    public String toString() {
-        return "Plan{" +
-                "planId='" + planId + '\'' +
-                ", userId='" + userId + '\'' +
-                ", date=" + date +
-                ", activities=" + activities +
-                '}';
-    }
+
 }

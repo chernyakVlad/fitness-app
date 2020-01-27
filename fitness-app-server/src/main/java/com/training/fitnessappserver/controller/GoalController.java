@@ -3,11 +3,12 @@ package com.training.fitnessappserver.controller;
 import com.training.fitnessappserver.entity.Activity;
 import com.training.fitnessappserver.entity.Exercise;
 import com.training.fitnessappserver.entity.Goal;
-import com.training.fitnessappserver.service.ActivityService;
 import com.training.fitnessappserver.service.ExerciseService;
 import com.training.fitnessappserver.service.GoalService;
+import com.training.fitnessappserver.service.PlanService;
 import com.training.fitnessappserver.service.impl.ActivityServiceImpl;
 import com.training.fitnessappserver.service.impl.GoalServiceImpl;
+import com.training.fitnessappserver.service.impl.PlanServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,16 +25,16 @@ public class GoalController {
 
     private GoalService goalService;
     private ExerciseService exerciseService;
-    private ActivityService activityService;
+    private PlanService planService;
 
 
     @Autowired
     public GoalController(GoalServiceImpl goalService,
-                          ActivityServiceImpl activityService,
+                          PlanServiceImpl planService,
                           ExerciseService exerciseService) {
         this.goalService = goalService;
         this.exerciseService = exerciseService;
-        this.activityService = activityService;
+        this.planService = planService;
     }
 
     @GetMapping(value = "")
@@ -65,10 +66,10 @@ public class GoalController {
     @GetMapping(value = "/{id}/activities")
     public ResponseEntity<List<Activity>> getActivitiesForDay(@PathVariable String id, @RequestParam(required = false) LocalDate date) {
         if (date != null) {
-            List<Activity> activities = (List<Activity>) activityService.getActivitiesByDateAndUserId(id, date);
+            List<Activity> activities = (List<Activity>) planService.getActivitiesForDay(id, date);
             return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
         }
-        List<Activity> activities = (List<Activity>) activityService.getActivitiesByDateAndUserId(id, date);
+        List<Activity> activities = (List<Activity>) planService.getActivitiesForDay(id, date);
         return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
     }
 
