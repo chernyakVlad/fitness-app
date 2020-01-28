@@ -1,6 +1,6 @@
 package com.training.fitnessappserver.repository;
 
-import com.training.fitnessappserver.entity.User;
+import com.training.fitnessappserver.entity.user.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.training.fitnessappserver.entity;
+package com.training.fitnessappserver.entity.goal;
 
 import com.training.fitnessappserver.entity.enums.GoalType;
 import lombok.Data;

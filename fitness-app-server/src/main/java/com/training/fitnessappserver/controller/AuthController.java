@@ -2,7 +2,7 @@ package com.training.fitnessappserver.controller;
 
 import com.training.fitnessappserver.dto.LoginRequestModel;
 import com.training.fitnessappserver.dto.RegisterRequestModel;
-import com.training.fitnessappserver.entity.User;
+import com.training.fitnessappserver.entity.user.User;
 import com.training.fitnessappserver.entity.JwtToken;
 import com.training.fitnessappserver.exception.UserValidationException;
 import com.training.fitnessappserver.service.AuthenticationSerivce;

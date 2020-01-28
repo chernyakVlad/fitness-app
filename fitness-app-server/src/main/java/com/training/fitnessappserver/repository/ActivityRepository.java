@@ -1,9 +1,8 @@
 package com.training.fitnessappserver.repository;
 
-import com.training.fitnessappserver.entity.Activity;
+import com.training.fitnessappserver.entity.plan.Activity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 

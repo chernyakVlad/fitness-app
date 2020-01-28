@@ -1,6 +1,6 @@
 package com.training.fitnessappserver.service.impl;
 
-import com.training.fitnessappserver.entity.Goal;
+import com.training.fitnessappserver.entity.goal.Goal;
 import com.training.fitnessappserver.exception.ItemNotFoundException;
 import com.training.fitnessappserver.repository.GoalRepository;
 import com.training.fitnessappserver.service.GoalService;

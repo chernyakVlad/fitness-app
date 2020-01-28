@@ -1,4 +1,4 @@
-package com.training.fitnessappserver.entity;
+package com.training.fitnessappserver.entity.plan;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

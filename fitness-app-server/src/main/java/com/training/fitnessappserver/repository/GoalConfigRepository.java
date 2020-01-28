@@ -1,6 +1,6 @@
 package com.training.fitnessappserver.repository;
 
-import com.training.fitnessappserver.entity.GoalConfig;
+import com.training.fitnessappserver.entity.goal.GoalConfig;
 import com.training.fitnessappserver.entity.enums.GoalType;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Component;

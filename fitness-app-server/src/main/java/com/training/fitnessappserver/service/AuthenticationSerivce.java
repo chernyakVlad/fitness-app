@@ -2,7 +2,7 @@ package com.training.fitnessappserver.service;
 
 import com.training.fitnessappserver.dto.LoginRequestModel;
 import com.training.fitnessappserver.dto.RegisterRequestModel;
-import com.training.fitnessappserver.entity.User;
+import com.training.fitnessappserver.entity.user.User;
 import com.training.fitnessappserver.entity.JwtToken;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.security.core.AuthenticationException;

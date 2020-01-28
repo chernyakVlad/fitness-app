@@ -1,4 +1,4 @@
-package com.training.fitnessappserver.entity;
+package com.training.fitnessappserver.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

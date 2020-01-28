@@ -1,6 +1,6 @@
 package com.training.fitnessappserver.controller;
 
-import com.training.fitnessappserver.entity.Exercise;
+import com.training.fitnessappserver.entity.exercise.Exercise;
 import com.training.fitnessappserver.service.ExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

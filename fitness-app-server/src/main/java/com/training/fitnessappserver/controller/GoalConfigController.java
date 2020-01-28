@@ -1,7 +1,6 @@
 package com.training.fitnessappserver.controller;
 
-import com.training.fitnessappserver.entity.Goal;
-import com.training.fitnessappserver.entity.GoalConfig;
+import com.training.fitnessappserver.entity.goal.GoalConfig;
 import com.training.fitnessappserver.entity.enums.GoalType;
 import com.training.fitnessappserver.service.GoalConfigService;
 import org.springframework.beans.factory.annotation.Autowired;

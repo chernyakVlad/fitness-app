@@ -1,6 +1,6 @@
 package com.training.fitnessappserver.controller;
 
-import com.training.fitnessappserver.entity.User;
+import com.training.fitnessappserver.entity.user.User;
 import com.training.fitnessappserver.service.ImageStore;
 import com.training.fitnessappserver.service.UserService;
 import com.training.fitnessappserver.service.impl.ImageStoreInFileSystem;

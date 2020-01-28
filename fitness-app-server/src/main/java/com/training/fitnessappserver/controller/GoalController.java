@@ -1,12 +1,11 @@
 package com.training.fitnessappserver.controller;
 
-import com.training.fitnessappserver.entity.Activity;
-import com.training.fitnessappserver.entity.Exercise;
-import com.training.fitnessappserver.entity.Goal;
+import com.training.fitnessappserver.entity.plan.Activity;
+import com.training.fitnessappserver.entity.exercise.Exercise;
+import com.training.fitnessappserver.entity.goal.Goal;
 import com.training.fitnessappserver.service.ExerciseService;
 import com.training.fitnessappserver.service.GoalService;
 import com.training.fitnessappserver.service.PlanService;
-import com.training.fitnessappserver.service.impl.ActivityServiceImpl;
 import com.training.fitnessappserver.service.impl.GoalServiceImpl;
 import com.training.fitnessappserver.service.impl.PlanServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,15 +62,15 @@ public class GoalController {
         return new ResponseEntity<Exercise>(exerciseService.update(exerciseId, exercise), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}/activities")
-    public ResponseEntity<List<Activity>> getActivitiesForDay(@PathVariable String id, @RequestParam(required = false) LocalDate date) {
-        if (date != null) {
-            List<Activity> activities = (List<Activity>) planService.getActivitiesForDay(id, date);
-            return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
-        }
-        List<Activity> activities = (List<Activity>) planService.getActivitiesForDay(id, date);
-        return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
-    }
+//    @GetMapping(value = "/{id}/activities")
+//    public ResponseEntity<List<Activity>> getActivitiesForDay(@PathVariable String id, @RequestParam(required = false) LocalDate date) {
+//        if (date != null) {
+//            List<Activity> activities = (List<Activity>) planService.getActivitiesForDay(id, date);
+//            return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
+//        }
+//        List<Activity> activities = (List<Activity>) planService.getActivitiesForDay(id, date);
+//        return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
+//    }
 
     @PostMapping(value = "")
     public ResponseEntity<Goal> save(@RequestBody Goal goal) {

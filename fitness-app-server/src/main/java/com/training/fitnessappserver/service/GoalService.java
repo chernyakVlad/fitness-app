@@ -1,6 +1,6 @@
 package com.training.fitnessappserver.service;
 
-import com.training.fitnessappserver.entity.Goal;
+import com.training.fitnessappserver.entity.goal.Goal;
 
 import java.util.List;
 

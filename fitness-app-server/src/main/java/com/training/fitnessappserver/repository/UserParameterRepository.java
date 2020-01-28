@@ -1,6 +1,6 @@
 package com.training.fitnessappserver.repository;
 
-import com.training.fitnessappserver.entity.UserParameters;
+import com.training.fitnessappserver.entity.user.UserParameters;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;

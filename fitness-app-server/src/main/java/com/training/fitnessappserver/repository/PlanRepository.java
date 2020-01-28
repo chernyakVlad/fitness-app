@@ -1,7 +1,6 @@
 package com.training.fitnessappserver.repository;
 
-import com.training.fitnessappserver.entity.Activity;
-import com.training.fitnessappserver.entity.Plan;
+import com.training.fitnessappserver.entity.plan.Plan;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.time.LocalDate;

@@ -1,6 +1,6 @@
 package com.training.fitnessappserver.security;
 
-import com.training.fitnessappserver.entity.User;
+import com.training.fitnessappserver.entity.user.User;
 import com.training.fitnessappserver.service.UserService;
 import com.training.fitnessappserver.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
