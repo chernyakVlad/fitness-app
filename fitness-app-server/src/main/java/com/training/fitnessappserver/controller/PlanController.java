@@ -60,6 +60,10 @@ public class PlanController {
     public ResponseEntity<Plan> save(@RequestBody Plan plan) {
         return new ResponseEntity<>(planService.save(plan), HttpStatus.CREATED);
     }
+    @GetMapping(value = "/u/{userId}/{date}")
+    public ResponseEntity<Plan> getByUserId(@PathVariable String userId,@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return new ResponseEntity<Plan>(planService.getPlanByUserIdAndDate(userId,date), HttpStatus.OK);
+    }
 
     @GetMapping(value = "/u/{userId}")
     public ResponseEntity<Plan> getByUserId(@PathVariable String userId) {

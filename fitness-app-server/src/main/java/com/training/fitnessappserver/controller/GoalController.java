@@ -62,15 +62,6 @@ public class GoalController {
         return new ResponseEntity<Exercise>(exerciseService.update(exerciseId, exercise), HttpStatus.OK);
     }
 
-//    @GetMapping(value = "/{id}/activities")
-//    public ResponseEntity<List<Activity>> getActivitiesForDay(@PathVariable String id, @RequestParam(required = false) LocalDate date) {
-//        if (date != null) {
-//            List<Activity> activities = (List<Activity>) planService.getActivitiesForDay(id, date);
-//            return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
-//        }
-//        List<Activity> activities = (List<Activity>) planService.getActivitiesForDay(id, date);
-//        return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
-//    }
 
     @PostMapping(value = "")
     public ResponseEntity<Goal> save(@RequestBody Goal goal) {

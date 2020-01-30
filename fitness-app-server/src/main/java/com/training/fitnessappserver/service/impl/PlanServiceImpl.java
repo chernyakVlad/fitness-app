@@ -18,18 +18,15 @@ import java.util.List;
 public class PlanServiceImpl implements PlanService {
     PlanRepository planRepository;
     PlanService planService;
-    ActivityRepository activityRepository;
 
     @Autowired
-    public PlanServiceImpl(PlanRepository planRepository, ActivityRepository activityRepository) {
+    public PlanServiceImpl(PlanRepository planRepository) {
         this.planRepository = planRepository;
-        this.activityRepository = activityRepository;
     }
 
     @Override
     public Plan addPlanActivity(String planId, Activity activity) {
         Plan plan = getById(planId);
-        new ActivityServiceImpl(activityRepository).save(activity);
         plan.getActivities().add(activity);
         return save(plan);
 
@@ -39,7 +36,7 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public Plan getByUserId(String userId) {
         LocalDate date = LocalDate.now();
-        return getPlan(userId, date);
+        return getPlanByUserIdAndDate(userId, date);
     }
 
 
@@ -57,7 +54,7 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public Plan update(String userId, Plan plan) {
-        Plan updatePlan = this.getPlan(userId, plan.getDate());
+        Plan updatePlan = this.getPlanByUserIdAndDate(userId, plan.getDate());
         BeanUtils.copyProperties(plan, updatePlan, "planId");
         return save(updatePlan);
 
@@ -65,7 +62,7 @@ public class PlanServiceImpl implements PlanService {
 
 
     @Override
-    public Plan getPlan(String userId, LocalDate date) {
+    public Plan getPlanByUserIdAndDate(String userId, LocalDate date) {
         return planRepository.getPlanByUserIdAndDate(userId, date)
                 .orElseThrow(() -> new ItemNotFoundException("There is no plan on date" + date.toString() + " user with userId " + userId));
     }

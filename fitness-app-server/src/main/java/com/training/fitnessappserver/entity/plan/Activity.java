@@ -21,7 +21,10 @@ public class Activity {
     private long timeToComplete;
 
     public long getTimeToComplete() {
-        return  ChronoUnit.MINUTES.between(start,end);
+        if(start!=null&&end!=null) {
+            return ChronoUnit.MINUTES.between(start, end);
+        }else
+            return 0;
     }
 
     public Activity() {

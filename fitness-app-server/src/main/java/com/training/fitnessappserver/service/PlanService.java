@@ -13,11 +13,11 @@ public interface PlanService {
 
     Plan getByUserId(String userId);
 
-    Plan getPlan(String userId, LocalDate date);
+    Plan getPlanByUserIdAndDate(String userId, LocalDate date);
 
     Plan save(Plan plan);
 
-    Plan update(String id, Plan plan);
+    Plan update(String planId, Plan plan);
 
-    Plan addPlanActivity(String id, Activity activity);
+    Plan addPlanActivity(String planId, Activity activity);
 }

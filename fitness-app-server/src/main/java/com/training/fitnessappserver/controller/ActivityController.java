@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/plans/activities")
+@RequestMapping("/api/v1/plans")
 @CrossOrigin(origins = "http://localhost:3000")
 public class ActivityController {
     ActivityService activityService;
@@ -22,13 +22,13 @@ public class ActivityController {
     }
 
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/activities/{id}")
     public ResponseEntity<Activity> updateActivity(@PathVariable String id, @RequestBody Activity activity) {
         return new ResponseEntity<Activity>(activityService.update(id, activity), HttpStatus.OK);
     }
-    @PostMapping(value = "")
-    public ResponseEntity<Activity> save(@RequestBody Activity activity) {
-        return new ResponseEntity<>(activityService.save(activity), HttpStatus.CREATED);
+    @PostMapping(value = "/{planId}/activities")
+    public ResponseEntity<Activity> addActivity(@PathVariable String planId,@RequestBody Activity activity) {
+        return new ResponseEntity<Activity>(activityService.addActivity(planId, activity), HttpStatus.CREATED);
     }
 
 }

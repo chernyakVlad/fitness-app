@@ -17,7 +17,6 @@ import java.util.Objects;
 @Document(collection = "plan")
 public class Plan {
     @Id
-    private String planId;
     private String userId;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date;
@@ -29,15 +28,14 @@ public class Plan {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Plan plan = (Plan) o;
-        return Objects.equals(planId, plan.planId) &&
-                Objects.equals(userId, plan.userId) &&
+        return  Objects.equals(userId, plan.userId) &&
                 Objects.equals(date, plan.date) &&
                 Objects.equals(activities, plan.activities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(planId, userId, date, activities);
+        return Objects.hash( userId, date, activities);
     }
 
     public List<Activity> getActivities() {
