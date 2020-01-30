@@ -1,7 +1,7 @@
 package com.training.fitnessappserver.service.impl;
 
-import com.training.fitnessappserver.entity.User;
-import com.training.fitnessappserver.entity.UserParameters;
+import com.training.fitnessappserver.entity.user.User;
+import com.training.fitnessappserver.entity.user.UserParameters;
 import com.training.fitnessappserver.exception.ItemNotFoundException;
 import com.training.fitnessappserver.repository.RoleRepository;
 import com.training.fitnessappserver.repository.UserParameterRepository;

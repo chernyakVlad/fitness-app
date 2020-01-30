@@ -1,7 +1,7 @@
 package com.training.fitnessappserver.controller;
 
-import com.training.fitnessappserver.entity.User;
-import com.training.fitnessappserver.entity.UserParameters;
+import com.training.fitnessappserver.entity.user.User;
+import com.training.fitnessappserver.entity.user.UserParameters;
 import com.training.fitnessappserver.service.UserService;
 import com.training.fitnessappserver.service.impl.UserServiceImpl;
 import io.swagger.annotations.ApiOperation;

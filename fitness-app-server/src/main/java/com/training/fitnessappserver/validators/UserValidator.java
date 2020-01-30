@@ -1,7 +1,7 @@
 package com.training.fitnessappserver.validators;
 
 import com.training.fitnessappserver.dto.RegisterRequestModel;
-import com.training.fitnessappserver.entity.User;
+import com.training.fitnessappserver.entity.user.User;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

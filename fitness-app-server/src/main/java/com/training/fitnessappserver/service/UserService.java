@@ -1,7 +1,7 @@
 package com.training.fitnessappserver.service;
 
-import com.training.fitnessappserver.entity.User;
-import com.training.fitnessappserver.entity.UserParameters;
+import com.training.fitnessappserver.entity.user.User;
+import com.training.fitnessappserver.entity.user.UserParameters;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

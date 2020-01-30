@@ -1,4 +1,4 @@
-package com.training.fitnessappserver.entity;
+package com.training.fitnessappserver.entity.user;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

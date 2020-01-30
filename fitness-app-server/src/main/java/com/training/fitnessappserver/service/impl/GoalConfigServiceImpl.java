@@ -1,10 +1,9 @@
 package com.training.fitnessappserver.service.impl;
 
-import com.training.fitnessappserver.entity.GoalConfig;
+import com.training.fitnessappserver.entity.goal.GoalConfig;
 import com.training.fitnessappserver.entity.enums.GoalType;
 import com.training.fitnessappserver.exception.ItemNotFoundException;
 import com.training.fitnessappserver.repository.GoalConfigRepository;
-import com.training.fitnessappserver.repository.GoalRepository;
 import com.training.fitnessappserver.service.GoalConfigService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,10 @@
 package com.training.fitnessappserver.validators;
 
 import com.training.fitnessappserver.dto.RegisterRequestModel;
+import com.training.fitnessappserver.exception.ItemNotFoundException;
+import com.training.fitnessappserver.repository.UserRepository;
+import com.training.fitnessappserver.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -10,6 +14,13 @@ import org.springframework.validation.Validator;
 public class RegistrationUserValidator implements Validator {
     private static final int MINIMUM_PASSWORD_LENGTH = 6;
     private static final int MINIMUM_LOGIN_LENGTH = 4;
+
+    UserRepository userRepository;
+
+    @Autowired
+    public RegistrationUserValidator(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -32,6 +43,16 @@ public class RegistrationUserValidator implements Validator {
             errors.rejectValue("login", "field.min.length",
                     new Object[]{Integer.valueOf(MINIMUM_LOGIN_LENGTH)},
                     "The login must be at least [" + MINIMUM_LOGIN_LENGTH + "] characters in length.");
+        }
+
+        try {
+
+        } catch (ItemNotFoundException ex) {
+
+        }
+
+        if(userRepository.findByLogin(registrationModel.getLogin()).isPresent()) {
+            errors.rejectValue("login", "value.negative", "User with login - " + registrationModel.getLogin() + " already exists.");
         }
     }
 }

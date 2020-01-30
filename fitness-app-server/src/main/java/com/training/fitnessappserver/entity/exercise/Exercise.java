@@ -1,11 +1,10 @@
-package com.training.fitnessappserver.entity;
+package com.training.fitnessappserver.entity.exercise;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Document(collection = "exercise")
 public class Exercise {

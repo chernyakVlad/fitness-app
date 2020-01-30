@@ -1,14 +1,13 @@
 package com.training.fitnessappserver.controller;
 
-import com.training.fitnessappserver.entity.Activity;
-import com.training.fitnessappserver.entity.Exercise;
-import com.training.fitnessappserver.entity.Goal;
-import com.training.fitnessappserver.service.ActivityService;
+import com.training.fitnessappserver.entity.plan.Activity;
+import com.training.fitnessappserver.entity.exercise.Exercise;
+import com.training.fitnessappserver.entity.goal.Goal;
 import com.training.fitnessappserver.service.ExerciseService;
 import com.training.fitnessappserver.service.GoalService;
-import com.training.fitnessappserver.service.impl.ActivityServiceImpl;
-import com.training.fitnessappserver.service.impl.ExerciseStoreService;
+import com.training.fitnessappserver.service.PlanService;
 import com.training.fitnessappserver.service.impl.GoalServiceImpl;
+import com.training.fitnessappserver.service.impl.PlanServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,19 +24,16 @@ public class GoalController {
 
     private GoalService goalService;
     private ExerciseService exerciseService;
-    private ExerciseStoreService exerciseStoreService;
-    private ActivityService activityService;
+    private PlanService planService;
 
 
     @Autowired
     public GoalController(GoalServiceImpl goalService,
-                          ActivityServiceImpl activityService,
-                          ExerciseService exerciseService,
-                          ExerciseStoreService exerciseStoreService) {
+                          PlanServiceImpl planService,
+                          ExerciseService exerciseService) {
         this.goalService = goalService;
         this.exerciseService = exerciseService;
-        this.activityService = activityService;
-        this.exerciseStoreService = exerciseStoreService;
+        this.planService = planService;
     }
 
     @GetMapping(value = "")
@@ -63,18 +59,9 @@ public class GoalController {
 
     @PutMapping(value = "/{userId}/exercise/{exerciseId}")
     public ResponseEntity<Exercise> getExerciseForDay(@PathVariable String userId, @PathVariable String exerciseId, @RequestBody Exercise exercise) {
-        return new ResponseEntity<Exercise>(exerciseStoreService.update(exerciseId, exercise), HttpStatus.OK);
+        return new ResponseEntity<Exercise>(exerciseService.update(exerciseId, exercise), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}/activities")
-    public ResponseEntity<List<Activity>> getActivitiesForDay(@PathVariable String id, @RequestParam(required = false) LocalDate date) {
-        if (date != null) {
-            List<Activity> activities = activityService.getDailyActivities(id, date);
-            return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
-        }
-        List<Activity> activities = activityService.getDailyActivities(id, date);
-        return new ResponseEntity<List<Activity>>(activities, HttpStatus.OK);
-    }
 
     @PostMapping(value = "")
     public ResponseEntity<Goal> save(@RequestBody Goal goal) {

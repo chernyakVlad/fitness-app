@@ -1,4 +1,4 @@
-package com.training.fitnessappserver.entity;
+package com.training.fitnessappserver.entity.user;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
