@@ -23,10 +23,6 @@ public class ActivityServiceImpl implements ActivityService {
         this.planService = planService;
     }
 
-
-
-
-
     @Override
     public Activity getById(String activityId) {
         return activityRepository.findById(activityId)
@@ -43,11 +39,12 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public Activity save(Activity activity) {
-        return activityRepository.save(activity);
+        return activityRepository.insert(activity);
     }
     @Override
     public Activity addActivity(String planId,Activity activity) {
+        save(activity);
         planService.addPlanActivity(planId,activity);
-        return save(activity);
+        return activity;
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlanServiceImpl implements PlanService {
@@ -28,7 +29,7 @@ public class PlanServiceImpl implements PlanService {
     public Plan addPlanActivity(String planId, Activity activity) {
         Plan plan = getById(planId);
         plan.getActivities().add(activity);
-        return save(plan);
+        return planRepository.save(plan);
 
 
     }
@@ -49,7 +50,7 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public Plan save(Plan plan) {
-        return planRepository.save(plan);
+        return planRepository.insert(plan);
     }
 
     @Override
@@ -63,13 +64,13 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public Plan getPlanByUserIdAndDate(String userId, LocalDate date) {
-        return planRepository.getPlanByUserIdAndDate(userId, date)
-                .orElseThrow(() -> new ItemNotFoundException("There is no plan on date" + date.toString() + " user with userId " + userId));
+        Optional<Plan> plan = planRepository.getPlanByUserIdAndDate(userId, date);
+        return plan.orElseGet(() -> save(new Plan(userId, date)));
     }
 
     @Override
     public List<Activity> getActivitiesForDay(String planId) {
-        List<Activity> activities= planService.getById(planId).getActivities();
+        List<Activity> activities = planService.getById(planId).getActivities();
         activities.sort(Comparator.comparing(Activity::getStart));
         return activities;
     }

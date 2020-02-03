@@ -12,7 +12,6 @@ import java.time.temporal.ChronoUnit;
 public class Activity {
     @Id
     private String activityId;
-    private String planId;
     private String name;
     private String description;
     private boolean isCompleted;

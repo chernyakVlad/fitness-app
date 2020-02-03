@@ -52,7 +52,6 @@ public class PlanController {
         if (bindingResult.hasErrors()) {
             throw new RuntimeException();
         }
-        activity.setPlanId(id);
         return new ResponseEntity<>(planService.addPlanActivity(id, activity), HttpStatus.CREATED);
     }
 

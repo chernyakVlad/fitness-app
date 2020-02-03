@@ -26,8 +26,9 @@ public class ActivityController {
     public ResponseEntity<Activity> updateActivity(@PathVariable String id, @RequestBody Activity activity) {
         return new ResponseEntity<Activity>(activityService.update(id, activity), HttpStatus.OK);
     }
+
     @PostMapping(value = "/{planId}/activities")
-    public ResponseEntity<Activity> addActivity(@PathVariable String planId,@RequestBody Activity activity) {
+    public ResponseEntity<Activity> addActivity(@PathVariable String planId, @RequestBody Activity activity) {
         return new ResponseEntity<Activity>(activityService.addActivity(planId, activity), HttpStatus.CREATED);
     }
 
