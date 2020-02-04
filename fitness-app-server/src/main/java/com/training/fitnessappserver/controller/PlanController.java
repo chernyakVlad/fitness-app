@@ -12,7 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/plans")
@@ -31,8 +31,8 @@ public class PlanController {
     }
 
     @GetMapping(value = "/{planId}/activities")
-    public ResponseEntity<List<Activity>> getPlanActivities(@PathVariable String planId) {
-        return new ResponseEntity<List<Activity>>(planService.getActivitiesForDay(planId), HttpStatus.OK);
+    public ResponseEntity<Set<Activity>> getPlanActivities(@PathVariable String planId) {
+        return new ResponseEntity<Set<Activity>>(planService.getActivitiesForDay(planId), HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}")
@@ -43,16 +43,6 @@ public class PlanController {
             throw new RuntimeException();
         }
         return new ResponseEntity<>(planService.update(id, plan), HttpStatus.CREATED);
-    }
-
-    @PutMapping(value = "{id}/activity")
-    public ResponseEntity<Plan> addPlanActivity(@PathVariable String id,
-                                                @RequestBody Activity activity,
-                                                BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            throw new RuntimeException();
-        }
-        return new ResponseEntity<>(planService.addPlanActivity(id, activity), HttpStatus.CREATED);
     }
 
     @PostMapping(value = "")
@@ -67,5 +57,9 @@ public class PlanController {
     @GetMapping(value = "/u/{userId}")
     public ResponseEntity<Plan> getByUserId(@PathVariable String userId) {
         return new ResponseEntity<Plan>(planService.getByUserId(userId), HttpStatus.OK);
+    }
+    @PostMapping(value = "/{planId}/activities")
+    public ResponseEntity<Activity> addActivity(@PathVariable String planId, @RequestBody Activity activity) {
+        return new ResponseEntity<Activity>(planService.addPlanActivity(planId, activity), HttpStatus.CREATED);
     }
 }

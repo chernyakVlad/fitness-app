@@ -3,33 +3,39 @@ package com.training.fitnessappserver.service.impl;
 import com.training.fitnessappserver.entity.plan.Activity;
 import com.training.fitnessappserver.entity.plan.Plan;
 import com.training.fitnessappserver.exception.ItemNotFoundException;
-import com.training.fitnessappserver.repository.ActivityRepository;
 import com.training.fitnessappserver.repository.PlanRepository;
+import com.training.fitnessappserver.service.ActivityService;
 import com.training.fitnessappserver.service.PlanService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.List;
+import java.time.LocalTime;
 import java.util.Optional;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 @Service
 public class PlanServiceImpl implements PlanService {
     PlanRepository planRepository;
-    PlanService planService;
+    ActivityService activityService;
 
     @Autowired
-    public PlanServiceImpl(PlanRepository planRepository) {
+    public PlanServiceImpl(PlanRepository planRepository, ActivityService activityService) {
         this.planRepository = planRepository;
+        this.activityService = activityService;
     }
 
+
     @Override
-    public Plan addPlanActivity(String planId, Activity activity) {
+    public Activity addPlanActivity(String planId, Activity activity) {
         Plan plan = getById(planId);
-        plan.getActivities().add(activity);
-        return planRepository.save(plan);
+        Activity activity1 = activityService.save(activity);
+        plan.getActivities().add(activity1);
+        planRepository.save(plan);
+        return activity1;
 
 
     }
@@ -65,13 +71,31 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public Plan getPlanByUserIdAndDate(String userId, LocalDate date) {
         Optional<Plan> plan = planRepository.getPlanByUserIdAndDate(userId, date);
-        return plan.orElseGet(() -> save(new Plan(userId, date)));
+        return plan.orElseGet(() ->
+                createInitialPlan(userId, date));
+    }
+
+    private Plan createInitialPlan(String userId, LocalDate date) {
+        Plan plan1 = new Plan(userId, date);
+        plan1.setActivities(initialActivities(userId, date));
+        return save(plan1);
     }
 
     @Override
-    public List<Activity> getActivitiesForDay(String planId) {
-        List<Activity> activities = planService.getById(planId).getActivities();
-        activities.sort(Comparator.comparing(Activity::getStart));
+    public Set<Activity> getActivitiesForDay(String planId) {
+        return getById(planId).getActivities();
+    }
+
+    public SortedSet<Activity> initialActivities(String userId, LocalDate date) {
+        SortedSet<Activity> activities = new TreeSet<>();
+        activities.add(activityService.save(new Activity("Breakfast", " ", false, LocalTime.of(9, 45), LocalTime.of(10, 15))));
+        activities.add(activityService.save(new Activity("Morning activity", "Run or training for an hour", false, LocalTime.of(8, 0), LocalTime.of(9, 30))));
+        activities.add(activityService.save(new Activity("Work", " ", false, LocalTime.of(11, 0), LocalTime.of(13, 0))));
+        activities.add(activityService.save(new Activity("Lunch", " ", false, LocalTime.of(13, 15), LocalTime.of(13, 45))));
+        activities.add(activityService.save(new Activity("Work", " ", false, LocalTime.of(14, 0), LocalTime.of(16, 0))));
+        activities.add(activityService.save(new Activity("Second lunch", " ", false, LocalTime.of(16, 15), LocalTime.of(16, 45))));
+        activities.add(activityService.save(new Activity("Work", " ", false, LocalTime.of(17, 0), LocalTime.of(19, 0))));
+        activities.add(activityService.save(new Activity("Dinner", " ", false, LocalTime.of(20, 15), LocalTime.of(20, 45))));
         return activities;
     }
 

@@ -1,20 +1,16 @@
 package com.training.fitnessappserver.controller;
 
-import com.training.fitnessappserver.entity.plan.Activity;
 import com.training.fitnessappserver.entity.exercise.Exercise;
 import com.training.fitnessappserver.entity.goal.Goal;
 import com.training.fitnessappserver.service.ExerciseService;
 import com.training.fitnessappserver.service.GoalService;
-import com.training.fitnessappserver.service.PlanService;
 import com.training.fitnessappserver.service.impl.GoalServiceImpl;
-import com.training.fitnessappserver.service.impl.PlanServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -24,16 +20,13 @@ public class GoalController {
 
     private GoalService goalService;
     private ExerciseService exerciseService;
-    private PlanService planService;
 
 
     @Autowired
     public GoalController(GoalServiceImpl goalService,
-                          PlanServiceImpl planService,
                           ExerciseService exerciseService) {
         this.goalService = goalService;
         this.exerciseService = exerciseService;
-        this.planService = planService;
     }
 
     @GetMapping(value = "")

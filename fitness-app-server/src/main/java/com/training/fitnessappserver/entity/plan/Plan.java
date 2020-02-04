@@ -8,9 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
@@ -22,7 +20,7 @@ public class Plan {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date;
     @DBRef
-    private List<Activity> activities;
+    private SortedSet<Activity> activities;
 
     @Override
     public boolean equals(Object o) {
@@ -40,19 +38,23 @@ public class Plan {
         return Objects.hash(planId, userId, date, activities);
     }
 
-    public List<Activity> getActivities() {
-        if(this.activities==null){
-            activities=new ArrayList<>();
+    public Set<Activity> getActivities() {
+        if (this.activities == null) {
+            activities = new TreeSet<>();
         }
         return activities;
     }
 
-    public void setActivities(List<Activity> activities) {
-        this.activities = activities;
+    public void setActivities(SortedSet<Activity> activities) {
+        if (activities == null) {
+            this.activities = new TreeSet<>();
+        } else {
+            this.activities = activities;
+        }
     }
 
     public Plan(String userId, LocalDate date) {
-        this.activities=new ArrayList<>();
+        this.activities = new TreeSet<>();
         this.userId = userId;
         this.date = date;
     }

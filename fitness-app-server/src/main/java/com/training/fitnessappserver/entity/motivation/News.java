@@ -12,21 +12,21 @@ import java.util.Objects;
 @NoArgsConstructor
 @Document(collection = "news")
 public class News {
-    String newsId;
-    String text;
-    String description;
-    double timing;
-    double score;
-    List<String> picturesUrl;
+    private String newsId;
+    private String tag;
+    private String description;
+    private double timeToRead;
+    private double score;
+    private List<NewsItem> newsItems;
 
-    public List<String> getPicturesUrl() {
-        if(picturesUrl==null)
-            picturesUrl=new ArrayList<>();
-        return  picturesUrl;
+    public List<NewsItem> getPicturesUrl() {
+        if(newsItems==null)
+            newsItems=new ArrayList<>();
+        return  newsItems;
     }
 
-    public void setPicturesUrl(List<String> picturesUrl) {
-        this.picturesUrl = picturesUrl;
+    public void setPicturesUrl(List<NewsItem> picturesUrl) {
+        this.newsItems = picturesUrl;
     }
 
     @Override
@@ -34,16 +34,16 @@ public class News {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         News news = (News) o;
-        return Double.compare(news.timing, timing) == 0 &&
+        return Double.compare(news.timeToRead, timeToRead) == 0 &&
                 Double.compare(news.score, score) == 0 &&
                 Objects.equals(newsId, news.newsId) &&
-                Objects.equals(text, news.text) &&
+                Objects.equals(tag, news.tag) &&
                 Objects.equals(description, news.description) &&
-                Objects.equals(picturesUrl, news.picturesUrl);
+                Objects.equals(newsItems, news.newsItems);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(newsId, text, description, timing, score, picturesUrl);
+        return Objects.hash(newsId, tag, description, timeToRead, score, newsItems);
     }
 }

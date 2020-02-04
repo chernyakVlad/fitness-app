@@ -4,47 +4,53 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
 @Data
 @Document(collection = "activity")
-public class Activity {
+public class Activity implements Comparable<Activity> {
+
+
     @Id
     private String activityId;
     private String name;
     private String description;
-    private boolean isCompleted;
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private boolean completed;
+    private LocalTime start;
+    private LocalTime end;
     private long timeToComplete;
 
     public long getTimeToComplete() {
-        if(start!=null&&end!=null) {
+        if (start != null && end != null) {
             return ChronoUnit.MINUTES.between(start, end);
-        }else
+        } else
             return 0;
     }
 
     public Activity() {
     }
 
-    public Activity(String name, String description, boolean isCompleted, LocalDateTime start, LocalDateTime end) {
+    public Activity(String name, String description, boolean completed, LocalTime start, LocalTime end) {
 
         this.name = name;
         this.description = description;
-        this.isCompleted = isCompleted;
+        this.completed = completed;
         this.start = start;
         this.end = end;
     }
 
-    public Activity(String name, String description, boolean isCompleted) {
+    public Activity(String name, String description, boolean completed) {
 
         this.name = name;
         this.description = description;
-        this.isCompleted = isCompleted;
+        this.completed = completed;
     }
 
+    @Override
+    public int compareTo(Activity o) {
+        return this.start.compareTo(o.start);
+    }
 
 }
 

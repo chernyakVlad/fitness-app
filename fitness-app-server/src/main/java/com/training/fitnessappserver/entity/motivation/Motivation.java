@@ -16,7 +16,6 @@ public class Motivation {
     String motivationId;
     String goalId;
     String userId;
-    String tips;
     @DBRef
     List<News> news;
 
@@ -27,13 +26,12 @@ public class Motivation {
         Motivation that = (Motivation) o;
         return Objects.equals(motivationId, that.motivationId) &&
                 Objects.equals(userId, that.userId) &&
-                Objects.equals(tips, that.tips) &&
                 Objects.equals(news, that.news);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(motivationId, userId, tips, news);
+        return Objects.hash(motivationId, userId, news);
     }
 
     public List<News> getNews() {

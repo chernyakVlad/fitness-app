@@ -5,9 +5,10 @@ import com.training.fitnessappserver.entity.plan.Plan;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 public interface PlanService {
-    List<Activity> getActivitiesForDay(String planId);
+    Set<Activity> getActivitiesForDay(String planId);
 
     Plan getById(String planId);
 
@@ -19,5 +20,5 @@ public interface PlanService {
 
     Plan update(String planId, Plan plan);
 
-    Plan addPlanActivity(String planId, Activity activity);
+    Activity addPlanActivity(String planId, Activity activity);
 }

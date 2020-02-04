@@ -16,6 +16,7 @@ import java.util.List;
 public class ActivityController {
     ActivityService activityService;
 
+
     @Autowired
     public ActivityController(ActivityServiceImpl activityService) {
         this.activityService = activityService;
@@ -27,9 +28,5 @@ public class ActivityController {
         return new ResponseEntity<Activity>(activityService.update(id, activity), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/{planId}/activities")
-    public ResponseEntity<Activity> addActivity(@PathVariable String planId, @RequestBody Activity activity) {
-        return new ResponseEntity<Activity>(activityService.addActivity(planId, activity), HttpStatus.CREATED);
-    }
 
 }
