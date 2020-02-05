@@ -1,7 +1,7 @@
 package com.training.fitnessappserver.service.impl;
 
-import com.training.fitnessappserver.entity.goal.GoalConfig;
 import com.training.fitnessappserver.entity.enums.GoalType;
+import com.training.fitnessappserver.entity.goal.GoalConfig;
 import com.training.fitnessappserver.exception.ItemNotFoundException;
 import com.training.fitnessappserver.repository.GoalConfigRepository;
 import com.training.fitnessappserver.service.GoalConfigService;
@@ -33,7 +33,7 @@ public class GoalConfigServiceImpl implements GoalConfigService {
     @Override
     public GoalConfig update(GoalConfig config) {
         GoalConfig newConfig = get(config.getGoalType());
-        BeanUtils.copyProperties(config, newConfig, "id", "goalType" );
+        BeanUtils.copyProperties(config, newConfig, "id", "goalType");
         return goalConfigRepository.save(newConfig);
     }
 }

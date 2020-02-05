@@ -1,5 +1,6 @@
 package com.training.fitnessappserver.entity.motivation;
 
+import com.training.fitnessappserver.entity.enums.GoalType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -7,41 +8,27 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Data
 @NoArgsConstructor
 @Document(collection = "motivation")
 public class Motivation {
     String motivationId;
-    String goalId;
+    GoalType goalType;
     String userId;
     @DBRef
-    List<News> news;
+    List<MotivationItem> news;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Motivation that = (Motivation) o;
-        return Objects.equals(motivationId, that.motivationId) &&
-                Objects.equals(userId, that.userId) &&
-                Objects.equals(news, that.news);
+    public Motivation(String userId, GoalType goalType) {
+        this.goalType = goalType;
+        this.userId = userId;
+        this.news = new ArrayList<>();
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(motivationId, userId, news);
-    }
-
-    public List<News> getNews() {
+    public List<MotivationItem> getMotivationItem() {
         if (this.news == null) {
             news = new ArrayList<>();
         }
         return news;
-    }
-
-    public void setNews(List<News> news) {
-        this.news = news;
     }
 }

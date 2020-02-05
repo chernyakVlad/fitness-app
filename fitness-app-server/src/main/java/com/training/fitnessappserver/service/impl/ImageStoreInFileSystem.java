@@ -18,6 +18,7 @@ import java.util.Base64;
 public class ImageStoreInFileSystem implements ImageStore {
     private final static String ROOT_IMAGES_PATH = "D:\\imgs";
     private File root;
+
     public ImageStoreInFileSystem() {
         this.root = new File(ROOT_IMAGES_PATH);
     }

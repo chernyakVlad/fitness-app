@@ -32,7 +32,7 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public Activity addPlanActivity(String planId, Activity activity) {
         Plan plan = getById(planId);
-        Activity activity1 = activityService.save(activity);
+        Activity activity1 = activityService.addActivity(activity);
         plan.getActivities().add(activity1);
         planRepository.save(plan);
         return activity1;
@@ -55,7 +55,7 @@ public class PlanServiceImpl implements PlanService {
 
 
     @Override
-    public Plan save(Plan plan) {
+    public Plan addPlan(Plan plan) {
         return planRepository.insert(plan);
     }
 
@@ -63,10 +63,23 @@ public class PlanServiceImpl implements PlanService {
     public Plan update(String userId, Plan plan) {
         Plan updatePlan = this.getPlanByUserIdAndDate(userId, plan.getDate());
         BeanUtils.copyProperties(plan, updatePlan, "planId");
-        return save(updatePlan);
+        return planRepository.save(updatePlan);
 
     }
 
+    @Override
+    public Activity updateActivity(String activityId, Activity activity) {
+        return activityService.update(activityId, activity);
+
+    }
+
+    @Override
+    public Plan deleteActivity(String planId, String activityId) {
+        Plan plan = getById(planId);
+        plan.getActivities().remove(activityService.getById(activityId));
+        activityService.delete(activityId);
+        return plan;
+    }
 
     @Override
     public Plan getPlanByUserIdAndDate(String userId, LocalDate date) {
@@ -78,7 +91,7 @@ public class PlanServiceImpl implements PlanService {
     private Plan createInitialPlan(String userId, LocalDate date) {
         Plan plan1 = new Plan(userId, date);
         plan1.setActivities(initialActivities(userId, date));
-        return save(plan1);
+        return addPlan(plan1);
     }
 
     @Override
@@ -86,16 +99,17 @@ public class PlanServiceImpl implements PlanService {
         return getById(planId).getActivities();
     }
 
+
     public SortedSet<Activity> initialActivities(String userId, LocalDate date) {
         SortedSet<Activity> activities = new TreeSet<>();
-        activities.add(activityService.save(new Activity("Breakfast", " ", false, LocalTime.of(9, 45), LocalTime.of(10, 15))));
-        activities.add(activityService.save(new Activity("Morning activity", "Run or training for an hour", false, LocalTime.of(8, 0), LocalTime.of(9, 30))));
-        activities.add(activityService.save(new Activity("Work", " ", false, LocalTime.of(11, 0), LocalTime.of(13, 0))));
-        activities.add(activityService.save(new Activity("Lunch", " ", false, LocalTime.of(13, 15), LocalTime.of(13, 45))));
-        activities.add(activityService.save(new Activity("Work", " ", false, LocalTime.of(14, 0), LocalTime.of(16, 0))));
-        activities.add(activityService.save(new Activity("Second lunch", " ", false, LocalTime.of(16, 15), LocalTime.of(16, 45))));
-        activities.add(activityService.save(new Activity("Work", " ", false, LocalTime.of(17, 0), LocalTime.of(19, 0))));
-        activities.add(activityService.save(new Activity("Dinner", " ", false, LocalTime.of(20, 15), LocalTime.of(20, 45))));
+        activities.add(activityService.addActivity(new Activity("Breakfast", " ", false, LocalTime.of(9, 45), LocalTime.of(10, 15))));
+        activities.add(activityService.addActivity(new Activity("Morning activity", "Run or training for an hour", false, LocalTime.of(8, 0), LocalTime.of(9, 30))));
+        activities.add(activityService.addActivity(new Activity("Work", " ", false, LocalTime.of(11, 0), LocalTime.of(13, 0))));
+        activities.add(activityService.addActivity(new Activity("Lunch", " ", false, LocalTime.of(13, 15), LocalTime.of(13, 45))));
+        activities.add(activityService.addActivity(new Activity("Work", " ", false, LocalTime.of(14, 0), LocalTime.of(16, 0))));
+        activities.add(activityService.addActivity(new Activity("Second lunch", " ", false, LocalTime.of(16, 15), LocalTime.of(16, 45))));
+        activities.add(activityService.addActivity(new Activity("Work", " ", false, LocalTime.of(17, 0), LocalTime.of(19, 0))));
+        activities.add(activityService.addActivity(new Activity("Dinner", " ", false, LocalTime.of(20, 15), LocalTime.of(20, 45))));
         return activities;
     }
 

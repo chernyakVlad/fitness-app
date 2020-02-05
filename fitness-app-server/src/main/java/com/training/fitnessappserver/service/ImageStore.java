@@ -7,6 +7,8 @@ import java.io.IOException;
 
 public interface ImageStore {
     public Resource save(MultipartFile file, String fileName) throws IOException;
+
     public String getAsBase64String(String fileName) throws IOException;
+
     public Resource getAsResource(String fileName) throws IOException;
 }

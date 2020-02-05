@@ -1,0 +1,19 @@
+{
+  "name": "Breakfast",
+  "description": "Breakfast",
+  "isCompleted": false,
+  "start": {
+    "$date": {
+      "$numberLong": "35100"
+    }
+  },
+  "end": {
+    "$date": {
+      "$numberLong": "36900"
+    }
+  },
+  "timeToComplete": {
+    "$numberLong": "1800"
+  },
+  "_class": "com.training.fitnessappserver.entity.plan.Activity"
+}

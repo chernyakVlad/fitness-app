@@ -29,7 +29,7 @@ public class GoalServiceImpl implements GoalService {
     @Override
     public List<Goal> getAll() {
         List<Goal> goals = goalRepository.findAll();
-        if(goals.size() <= 0) {
+        if (goals.size() <= 0) {
             throw new ItemNotFoundException("No goals found");
         }
         return goals;
@@ -38,7 +38,7 @@ public class GoalServiceImpl implements GoalService {
     @Override
     public List<Goal> getByUserId(String userId) {
         List<Goal> goals = goalRepository.findByUserId(userId);
-        if(goals.size() <= 0) {
+        if (goals.size() <= 0) {
             throw new ItemNotFoundException("User with id - " + userId + " has no goals");
         }
         return goals;

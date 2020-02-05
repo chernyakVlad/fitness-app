@@ -6,7 +6,9 @@ public interface ActivityService {
 
     Activity update(String id, Activity activity);
 
-    Activity save(Activity activity);
+    Activity addActivity(Activity activity);
 
     Activity getById(String activityId);
+
+    void delete(String activityId);
 }

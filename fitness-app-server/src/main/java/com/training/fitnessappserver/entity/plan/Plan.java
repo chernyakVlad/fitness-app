@@ -8,7 +8,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Objects;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 @Data
 @NoArgsConstructor
@@ -21,6 +24,12 @@ public class Plan {
     private LocalDate date;
     @DBRef
     private SortedSet<Activity> activities;
+
+    public Plan(String userId, LocalDate date) {
+        this.activities = new TreeSet<>();
+        this.userId = userId;
+        this.date = date;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -51,11 +60,5 @@ public class Plan {
         } else {
             this.activities = activities;
         }
-    }
-
-    public Plan(String userId, LocalDate date) {
-        this.activities = new TreeSet<>();
-        this.userId = userId;
-        this.date = date;
     }
 }

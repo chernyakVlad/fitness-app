@@ -47,19 +47,32 @@ public class PlanController {
 
     @PostMapping(value = "")
     public ResponseEntity<Plan> save(@RequestBody Plan plan) {
-        return new ResponseEntity<>(planService.save(plan), HttpStatus.CREATED);
+        return new ResponseEntity<>(planService.addPlan(plan), HttpStatus.CREATED);
     }
+
     @GetMapping(value = "/u/{userId}/{date}")
-    public ResponseEntity<Plan> getByUserId(@PathVariable String userId,@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        return new ResponseEntity<Plan>(planService.getPlanByUserIdAndDate(userId,date), HttpStatus.OK);
+    public ResponseEntity<Plan> getByUserId(@PathVariable String userId, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return new ResponseEntity<Plan>(planService.getPlanByUserIdAndDate(userId, date), HttpStatus.OK);
     }
 
     @GetMapping(value = "/u/{userId}")
     public ResponseEntity<Plan> getByUserId(@PathVariable String userId) {
         return new ResponseEntity<Plan>(planService.getByUserId(userId), HttpStatus.OK);
     }
+
     @PostMapping(value = "/{planId}/activities")
     public ResponseEntity<Activity> addActivity(@PathVariable String planId, @RequestBody Activity activity) {
         return new ResponseEntity<Activity>(planService.addPlanActivity(planId, activity), HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/activities/{id}")
+    public ResponseEntity<Activity> updateActivity(@PathVariable String id, @RequestBody Activity activity) {
+        return new ResponseEntity<Activity>(planService.updateActivity(id, activity), HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/{planId}/activities/{activityId}")
+    public ResponseEntity<?> delete(@PathVariable String planId, @PathVariable String activityId) {
+        planService.deleteActivity(planId, activityId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

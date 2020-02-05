@@ -1,7 +1,7 @@
 package com.training.fitnessappserver.controller;
 
-import com.training.fitnessappserver.entity.goal.GoalConfig;
 import com.training.fitnessappserver.entity.enums.GoalType;
+import com.training.fitnessappserver.entity.goal.GoalConfig;
 import com.training.fitnessappserver.service.GoalConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000")
 public class GoalConfigController {
 
-    GoalConfigService  goalConfigService;
+    GoalConfigService goalConfigService;
 
     @Autowired
     public GoalConfigController(GoalConfigService goalConfigService) {

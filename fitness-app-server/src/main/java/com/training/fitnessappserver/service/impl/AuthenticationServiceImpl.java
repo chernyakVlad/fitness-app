@@ -2,8 +2,8 @@ package com.training.fitnessappserver.service.impl;
 
 import com.training.fitnessappserver.dto.LoginRequestModel;
 import com.training.fitnessappserver.dto.RegisterRequestModel;
-import com.training.fitnessappserver.entity.user.User;
 import com.training.fitnessappserver.entity.JwtToken;
+import com.training.fitnessappserver.entity.user.User;
 import com.training.fitnessappserver.security.JwtTokenProvider;
 import com.training.fitnessappserver.service.AuthenticationSerivce;
 import com.training.fitnessappserver.service.TokenStore;

@@ -1,9 +1,9 @@
 package com.training.fitnessappserver.service.impl;
 
+import com.training.fitnessappserver.entity.enums.GoalType;
 import com.training.fitnessappserver.entity.exercise.Exercise;
 import com.training.fitnessappserver.entity.goal.GoalConfig;
 import com.training.fitnessappserver.entity.user.User;
-import com.training.fitnessappserver.entity.enums.GoalType;
 import com.training.fitnessappserver.exception.ItemNotFoundException;
 import com.training.fitnessappserver.repository.ExerciseRepository;
 import com.training.fitnessappserver.service.ExerciseService;
@@ -25,10 +25,16 @@ public class ExerciseServiceImpl implements ExerciseService {
     ExerciseRepository exerciseRepository;
 
 
+    @Autowired
+    public ExerciseServiceImpl(UserService userService, GoalConfigService goalConfigService, ExerciseRepository exerciseRepository) {
+        this.userService = userService;
+        this.goalConfigService = goalConfigService;
+        this.exerciseRepository = exerciseRepository;
+    }
+
     public List<Exercise> getByUserIdAndDate(String userId, LocalDate date) {
         return exerciseRepository.getByUserIdAndDate(userId, date);
     }
-
 
     @Override
     public Exercise update(String exerciseId, Exercise exercise) {
@@ -40,15 +46,6 @@ public class ExerciseServiceImpl implements ExerciseService {
             throw new ItemNotFoundException("Exercise not found");
         }
     }
-    @Autowired
-    public ExerciseServiceImpl(UserService userService, GoalConfigService goalConfigService, ExerciseRepository exerciseRepository) {
-        this.userService = userService;
-        this.goalConfigService = goalConfigService;
-        this.exerciseRepository = exerciseRepository;
-    }
-
-
-
 
     @Override
     public Exercise getExerciseForToday(String userId) {

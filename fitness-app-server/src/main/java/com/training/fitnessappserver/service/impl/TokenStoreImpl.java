@@ -13,7 +13,7 @@ public class TokenStoreImpl implements TokenStore {
     private TokenRepository tokenRepository;
 
     @Autowired
-    public TokenStoreImpl(TokenRepository tokenRepository)  {
+    public TokenStoreImpl(TokenRepository tokenRepository) {
         this.tokenRepository = tokenRepository;
     }
 

@@ -19,7 +19,7 @@ public class LoginUserValidator implements Validator {
 
         LoginRequestModel loginRequestModel = (LoginRequestModel) o;
 
-        if(loginRequestModel.getPassword().length() < 6){
+        if (loginRequestModel.getPassword().length() < 6) {
             errors.rejectValue("password", "negativeValue", new Object[]{"'password'"}, "password length should be > 6");
         }
     }

@@ -2,8 +2,8 @@ package com.training.fitnessappserver.controller;
 
 import com.training.fitnessappserver.dto.LoginRequestModel;
 import com.training.fitnessappserver.dto.RegisterRequestModel;
-import com.training.fitnessappserver.entity.user.User;
 import com.training.fitnessappserver.entity.JwtToken;
+import com.training.fitnessappserver.entity.user.User;
 import com.training.fitnessappserver.exception.UserValidationException;
 import com.training.fitnessappserver.service.AuthenticationSerivce;
 import com.training.fitnessappserver.service.TokenStore;
@@ -38,10 +38,10 @@ public class AuthController {
         this.tokenStore = tokenStore;
     }
 
-    @PostMapping(value="/register")
+    @PostMapping(value = "/register")
     public ResponseEntity<User> signUp(@RequestBody RegisterRequestModel registerRequestModel, BindingResult bindingResult) {
         regUserValidator.validate(registerRequestModel, bindingResult);
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             throw new UserValidationException(RestExceptionHandler.createExceptionMessage(bindingResult.getAllErrors()));
         }
         return ResponseEntity.ok(authService.registration(registerRequestModel));
@@ -50,7 +50,7 @@ public class AuthController {
     @PostMapping(value = "/login")
     public ResponseEntity<JwtToken> signIn(@RequestBody LoginRequestModel lRequest, BindingResult bindingResult) {
         loginUserValidator.validate(lRequest, bindingResult);
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             throw new UserValidationException(RestExceptionHandler.createExceptionMessage(bindingResult.getAllErrors()));
         }
         return ResponseEntity.ok(authService.login(lRequest));

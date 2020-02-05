@@ -17,6 +17,19 @@ import java.util.List;
 @ControllerAdvice
 public class RestExceptionHandler {
 
+    public static String createExceptionMessage(List<ObjectError> errors) {
+        StringBuilder builder = new StringBuilder();
+        errors.forEach((error) -> {
+            FieldError err = (FieldError) error;
+            builder.append("Field - ")
+                    .append(err.getField())
+                    .append(" : ")
+                    .append(err.getDefaultMessage())
+                    .append("\n");
+        });
+        return builder.toString();
+    }
+
     @ExceptionHandler(AuthenticationException.class)
     protected ResponseEntity<ExceptionEntity> handleAuthenticationException(AuthenticationException e) {
         return new ResponseEntity<>(new ExceptionEntity(e.getMessage()), HttpStatus.NOT_FOUND);
@@ -56,18 +69,5 @@ public class RestExceptionHandler {
         public void setMessage(String message) {
             this.message = message;
         }
-    }
-
-    public static String createExceptionMessage(List<ObjectError> errors){
-        StringBuilder builder = new StringBuilder();
-        errors.forEach((error)->{
-            FieldError err = (FieldError) error;
-            builder.append("Field - ")
-                    .append(err.getField())
-                    .append(" : ")
-                    .append(err.getDefaultMessage())
-                    .append("\n");
-        });
-        return builder.toString();
     }
 }

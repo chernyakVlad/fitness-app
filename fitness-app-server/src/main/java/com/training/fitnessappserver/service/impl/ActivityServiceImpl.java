@@ -28,15 +28,20 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public Activity update(String activityId, Activity activity) {
 
-            Activity updateActivity = getById(activityId);
-            BeanUtils.copyProperties(activity, updateActivity, "activityId");
-            return activityRepository.save(updateActivity);
+        Activity updateActivity = getById(activityId);
+        BeanUtils.copyProperties(activity, updateActivity, "activityId");
+        return activityRepository.save(updateActivity);
     }
 
     @Override
-    public Activity save(Activity activity) {
+    public Activity addActivity(Activity activity) {
         return activityRepository.insert(activity);
     }
 
+    @Override
+    public void delete(String activityId) {
+        Activity activity = getById(activityId);
+        activityRepository.delete(activity);
+    }
 
 }

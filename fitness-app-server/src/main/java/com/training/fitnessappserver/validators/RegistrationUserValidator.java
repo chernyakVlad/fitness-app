@@ -3,7 +3,6 @@ package com.training.fitnessappserver.validators;
 import com.training.fitnessappserver.dto.RegisterRequestModel;
 import com.training.fitnessappserver.exception.ItemNotFoundException;
 import com.training.fitnessappserver.repository.UserRepository;
-import com.training.fitnessappserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
@@ -51,7 +50,7 @@ public class RegistrationUserValidator implements Validator {
 
         }
 
-        if(userRepository.findByLogin(registrationModel.getLogin()).isPresent()) {
+        if (userRepository.findByLogin(registrationModel.getLogin()).isPresent()) {
             errors.rejectValue("login", "value.negative", "User with login - " + registrationModel.getLogin() + " already exists.");
         }
     }

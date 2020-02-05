@@ -21,13 +21,6 @@ public class Activity implements Comparable<Activity> {
     private LocalTime end;
     private long timeToComplete;
 
-    public long getTimeToComplete() {
-        if (start != null && end != null) {
-            return ChronoUnit.MINUTES.between(start, end);
-        } else
-            return 0;
-    }
-
     public Activity() {
     }
 
@@ -45,6 +38,13 @@ public class Activity implements Comparable<Activity> {
         this.name = name;
         this.description = description;
         this.completed = completed;
+    }
+
+    public long getTimeToComplete() {
+        if (start != null && end != null) {
+            return ChronoUnit.MINUTES.between(start, end);
+        } else
+            return 0;
     }
 
     @Override
