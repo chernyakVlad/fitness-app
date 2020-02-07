@@ -4,3 +4,4 @@ public enum ItemType {
     TEXT,
     IMAGE
 }
+

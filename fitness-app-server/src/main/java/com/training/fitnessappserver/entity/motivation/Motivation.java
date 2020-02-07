@@ -24,19 +24,19 @@ public class Motivation {
     public Motivation(String userId, GoalType goalType) {
         this.goalType = goalType;
         this.userId = userId;
-        this.motivationItems = new ArrayList<>();
     }
 
-    public List<MotivationItem> getMotivationItem() {
+    public Motivation(GoalType goalType, String userId) {
+        this.goalType = goalType;
+        this.userId = userId;
+    }
+
+    public List<MotivationItem> getMotivationItems() {
         if (this.motivationItems == null) {
             motivationItems = new ArrayList<>();
         }
         return motivationItems;
     }
 
-    public Motivation(GoalType goalType, String userId) {
-        this.goalType = goalType;
-        this.userId = userId;
-        this.motivationItems = new ArrayList<>();
-    }
+
 }

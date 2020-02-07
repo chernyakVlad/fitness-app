@@ -31,22 +31,6 @@ public class Plan {
         this.date = date;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Plan plan = (Plan) o;
-        return Objects.equals(planId, plan.planId) &&
-                Objects.equals(userId, plan.userId) &&
-                Objects.equals(date, plan.date) &&
-                Objects.equals(activities, plan.activities);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(planId, userId, date, activities);
-    }
-
     public Set<Activity> getActivities() {
         if (this.activities == null) {
             activities = new TreeSet<>();

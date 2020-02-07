@@ -1,21 +1,33 @@
 package com.training.fitnessappserver.entity.motivation;
 
-import com.training.fitnessappserver.entity.enums.MotivationItemType;
+import com.training.fitnessappserver.entity.motivation.news.NewsItem;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
-@NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "motivation_item")
 public class MotivationItem {
     @Id
     private String motivationItemId;
-    private String tag;
-    private MotivationItemType motivationItemType;
+    private String description;
 
-    public MotivationItem(String tag) {
-        this.tag = tag;
+    private List<NewsItem> newsItems;
+    private String tag;
+    private double timeToRead;
+    private double score;
+
+    public List<NewsItem> getNewsItems() {
+        if (newsItems == null) {
+            this.newsItems = new ArrayList<>();
+        }
+        return newsItems;
     }
+
+
 }

@@ -25,8 +25,8 @@ public class MotivationServiceImpl implements MotivationService {
     @Override
     public Motivation addMotivationItem(String motivationId, MotivationItem motivationItem) {
         Motivation motivation = getMotivationById(motivationId);
-        MotivationItem newNews = motivationItemService.addMotivationItem(motivationItem);
-        motivation.getMotivationItems().add(newNews);
+        MotivationItem motivationItem1 = motivationItemService.addMotivationItem(motivationItem);
+        motivation.getMotivationItems().add(motivationItem1);
         return update(motivationId, motivation);
     }
 
@@ -40,7 +40,7 @@ public class MotivationServiceImpl implements MotivationService {
     @Override
     public Motivation update(String motivationId, Motivation motivation) {
         Motivation uMotivation = getMotivationById(motivationId);
-        BeanUtils.copyProperties(uMotivation, motivation, "motivationId");
+        BeanUtils.copyProperties(motivation, uMotivation, "motivationId");
         return motivationRepository.save(uMotivation);
     }
 
