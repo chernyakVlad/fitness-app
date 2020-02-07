@@ -8,8 +8,10 @@ public interface MotivationService {
 
     Motivation addMotivation(Motivation motivation);
 
-    Motivation getById(String motivationId);
+    Motivation getMotivationById(String motivationId);
 
-    Motivation addMotivationNews(String motivationId, MotivationItem motivationItem);
+    Motivation getMotivationByUserId(String userId);
+
+    Motivation addMotivationItem(String motivationId, MotivationItem motivationItem);
 
 }

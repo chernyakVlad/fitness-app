@@ -56,7 +56,11 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public Plan addPlan(Plan plan) {
-        return planRepository.insert(plan);
+        if (plan != null) {
+            return planRepository.insert(plan);
+        } else {
+            throw new ItemNotFoundException("There is no plan to add");
+        }
     }
 
     @Override

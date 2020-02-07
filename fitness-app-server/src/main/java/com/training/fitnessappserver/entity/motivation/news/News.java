@@ -1,30 +1,41 @@
 package com.training.fitnessappserver.entity.motivation.news;
 
+import com.training.fitnessappserver.entity.enums.MotivationItemType;
 import com.training.fitnessappserver.entity.motivation.MotivationItem;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Data
 @NoArgsConstructor
 public class News extends MotivationItem {
-
     private String description;
     private double timeToRead;
     private double score;
     private List<NewsItem> newsItems;
 
-    public List<NewsItem> getPicturesUrl() {
-        if (newsItems == null)
-            newsItems = new ArrayList<>();
-        return newsItems;
+    public News(String description, double timeToRead, double score) {
+        this.description = description;
+        this.timeToRead = timeToRead;
+        this.score = score;
+        this.setMotivationItemType(MotivationItemType.NEWS);
     }
 
-    public void setPicturesUrl(List<NewsItem> picturesUrl) {
-        this.newsItems = picturesUrl;
+    public News(String description, double timeToRead, double score, List<NewsItem> newsItems) {
+        this.description = description;
+        this.timeToRead = timeToRead;
+        this.score = score;
+        this.newsItems = newsItems;
+        this.setMotivationItemType(MotivationItemType.NEWS);
+    }
+
+    public News(String tag, String description, double timeToRead, double score, List<NewsItem> newsItems) {
+        super(tag);
+        this.description = description;
+        this.timeToRead = timeToRead;
+        this.score = score;
+        this.newsItems = newsItems;
+        this.setMotivationItemType(MotivationItemType.NEWS);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.training.fitnessappserver.service.impl;
 
+import com.training.fitnessappserver.entity.enums.GoalType;
 import com.training.fitnessappserver.entity.motivation.Motivation;
 import com.training.fitnessappserver.entity.motivation.MotivationItem;
 import com.training.fitnessappserver.exception.ItemNotFoundException;
@@ -22,23 +23,23 @@ public class MotivationServiceImpl implements MotivationService {
     }
 
     @Override
-    public Motivation addMotivationNews(String motivationId, MotivationItem motivationItem) {
-        Motivation motivation = getById(motivationId);
+    public Motivation addMotivationItem(String motivationId, MotivationItem motivationItem) {
+        Motivation motivation = getMotivationById(motivationId);
         MotivationItem newNews = motivationItemService.addMotivationItem(motivationItem);
-        motivation.getNews().add(newNews);
+        motivation.getMotivationItems().add(newNews);
         return update(motivationId, motivation);
     }
 
 
     @Override
-    public Motivation getById(String motivationId) {
+    public Motivation getMotivationById(String motivationId) {
         return motivationRepository.findById(motivationId)
                 .orElseThrow(() -> new ItemNotFoundException("motivation with id - " + motivationId + "not found"));
     }
 
     @Override
     public Motivation update(String motivationId, Motivation motivation) {
-        Motivation uMotivation = getById(motivationId);
+        Motivation uMotivation = getMotivationById(motivationId);
         BeanUtils.copyProperties(uMotivation, motivation, "motivationId");
         return motivationRepository.save(uMotivation);
     }
@@ -46,9 +47,22 @@ public class MotivationServiceImpl implements MotivationService {
     @Override
     public Motivation addMotivation(Motivation motivation) {
         if (motivation != null) {
-            return motivationRepository.save(motivation);
+            return motivationRepository.insert(motivation);
         } else {
             throw new ItemNotFoundException("There is no motivation to save");
         }
+    }
+
+    Motivation initialMotivation(String userId) {
+        Motivation motivation = new Motivation(userId, GoalType.HOLD);
+        return addMotivation(motivation);
+
+    }
+
+    @Override
+    public Motivation getMotivationByUserId(String userId) {
+        return motivationRepository.getMotivationByUserId(userId)
+                .orElseGet(() -> initialMotivation(userId));
+
     }
 }

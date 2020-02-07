@@ -1,8 +1,7 @@
 package com.training.fitnessappserver.controller;
 
 import com.training.fitnessappserver.entity.motivation.Motivation;
-import com.training.fitnessappserver.entity.motivation.news.News;
-import com.training.fitnessappserver.service.MotivationItemService;
+import com.training.fitnessappserver.entity.motivation.MotivationItem;
 import com.training.fitnessappserver.service.MotivationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000")
 public class MotivationController {
     MotivationService motivationService;
-    MotivationItemService motivationItemService;
 
     @Autowired
     public MotivationController(MotivationService motivationService) {
@@ -31,8 +29,14 @@ public class MotivationController {
         return new ResponseEntity<Motivation>(motivationService.update(motivationId, motivation), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{motivationId}/news")
-    public ResponseEntity<Motivation> addNews(@PathVariable String motivationId, @RequestBody News news) {
-        return new ResponseEntity<Motivation>(motivationService.addMotivationNews(motivationId, news), HttpStatus.OK);
+    @PutMapping(value = "/{motivationId}/motivationItems")
+    public ResponseEntity<Motivation> addMotivationItem(@PathVariable String motivationId, @RequestBody MotivationItem motivationItem) {
+        return new ResponseEntity<Motivation>(motivationService.addMotivationItem(motivationId, motivationItem), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/u/{userId}")
+    public ResponseEntity<Motivation> getByUserId(@PathVariable String userId) {
+        return new ResponseEntity<Motivation>(motivationService.getMotivationByUserId(userId), HttpStatus.OK);
+    }
+
 }
