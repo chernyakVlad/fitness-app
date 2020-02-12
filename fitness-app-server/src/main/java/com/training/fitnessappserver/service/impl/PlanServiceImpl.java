@@ -78,11 +78,10 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public Plan deleteActivity(String planId, String activityId) {
+    public void deleteActivity(String planId, String activityId) {
         Plan plan = getById(planId);
         plan.getActivities().remove(activityService.getById(activityId));
         activityService.delete(activityId);
-        return plan;
     }
 
     @Override

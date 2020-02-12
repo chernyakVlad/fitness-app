@@ -9,4 +9,5 @@ public interface MotivationItemService {
 
     MotivationItem getById(String motivationItemId);
 
+    void delete(String motivationItemId);
 }

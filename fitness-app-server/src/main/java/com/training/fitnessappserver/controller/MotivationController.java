@@ -29,14 +29,19 @@ public class MotivationController {
         return new ResponseEntity<Motivation>(motivationService.update(motivationId, motivation), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{motivationId}/motivationItems")
-    public ResponseEntity<Motivation> addMotivationItem(@PathVariable String motivationId, @RequestBody MotivationItem motivationItem) {
-        return new ResponseEntity<Motivation>(motivationService.addMotivationItem(motivationId, motivationItem), HttpStatus.OK);
+    @PostMapping(value = "/{motivationId}/motivationItems")
+    public ResponseEntity<MotivationItem> addMotivationItem(@PathVariable String motivationId, @RequestBody MotivationItem motivationItem) {
+        return new ResponseEntity<MotivationItem>(motivationService.addMotivationItem(motivationId, motivationItem), HttpStatus.OK);
     }
 
     @GetMapping(value = "/u/{userId}")
     public ResponseEntity<Motivation> getByUserId(@PathVariable String userId) {
         return new ResponseEntity<Motivation>(motivationService.getMotivationByUserId(userId), HttpStatus.OK);
+    }
+    @DeleteMapping(value = "/{motivationId}/motivationItems/{motivationItem}")
+    public ResponseEntity<?> delete(@PathVariable String motivationId, @PathVariable String motivationItem) {
+        motivationService.deleteMotivationItem(motivationId, motivationItem);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

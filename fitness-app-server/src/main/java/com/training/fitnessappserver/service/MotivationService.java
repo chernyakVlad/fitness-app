@@ -12,6 +12,8 @@ public interface MotivationService {
 
     Motivation getMotivationByUserId(String userId);
 
-    Motivation addMotivationItem(String motivationId, MotivationItem motivationItem);
+    MotivationItem addMotivationItem(String motivationId, MotivationItem motivationItem);
+
+    void deleteMotivationItem(String motivationId, String motivationItemId);
 
 }

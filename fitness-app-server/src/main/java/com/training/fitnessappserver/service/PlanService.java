@@ -23,5 +23,5 @@ public interface PlanService {
 
     Activity updateActivity(String activityId, Activity activity);
 
-    Plan deleteActivity(String planId, String activityId);
+    void deleteActivity(String planId, String activityId);
 }

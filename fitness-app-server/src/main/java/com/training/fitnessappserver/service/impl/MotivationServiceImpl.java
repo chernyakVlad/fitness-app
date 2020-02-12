@@ -23,11 +23,12 @@ public class MotivationServiceImpl implements MotivationService {
     }
 
     @Override
-    public Motivation addMotivationItem(String motivationId, MotivationItem motivationItem) {
+    public MotivationItem addMotivationItem(String motivationId, MotivationItem motivationItem) {
         Motivation motivation = getMotivationById(motivationId);
         MotivationItem motivationItem1 = motivationItemService.addMotivationItem(motivationItem);
         motivation.getMotivationItems().add(motivationItem1);
-        return update(motivationId, motivation);
+        update(motivationId, motivation);
+        return motivationItem1;
     }
 
 
@@ -64,5 +65,12 @@ public class MotivationServiceImpl implements MotivationService {
         return motivationRepository.getMotivationByUserId(userId)
                 .orElseGet(() -> initialMotivation(userId));
 
+    }
+
+    @Override
+    public void deleteMotivationItem(String motivationId, String motivationItemId) {
+        Motivation motivation = getMotivationById(motivationId);
+        motivation.getMotivationItems().remove(motivationItemService.getById(motivationItemId));
+        motivationItemService.delete(motivationItemId);
     }
 }
